@@ -33,13 +33,12 @@ class CreateNewAuction extends Component {
         return new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0];
     }
 
-    componentDidMount()
-    {
-        this.setState({SlutDatum: this.getCurrentDate()});
+    componentDidMount() {
+        this.setState({ SlutDatum: this.getCurrentDate() });
     }
 
     render() {
-                
+
         return (<div className="col-6">
             <h1>Skapa ny auktion</h1>
             <form onSubmit={this.handleSubmit}>
@@ -51,11 +50,9 @@ class CreateNewAuction extends Component {
                     <label for="beskrivning">Beskrivning</label>
                     <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" id="beskrivning" rows="5"></textarea>
                 </div>
-                <div className="form-group row">
+                <div className="form-group">
                     <label for="slutdatum" className="col-2 col-form-label">Slutdatum</label>
-                    <div className="col-10">
-                        <input onChange={this.handleChange} className="form-control" name="SlutDatum" id="slutdatum" type="datetime-local" value={this.state.SlutDatum} />
-                    </div>
+                    <input onChange={this.handleChange} className="form-control" name="SlutDatum" id="slutdatum" type="datetime-local" value={this.state.SlutDatum} />
                 </div>
                 <div className="form-group">
                     <label for="utropspris">Utropspris</label>
