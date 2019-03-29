@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateNewAuction from './components/Auctions/CreateNewAuction';
 import AuctionDetails from './components/Auctions/AuctionDetails'
 import { connect } from 'react-redux';
 import { fetchAuctions } from './store/actions/auctionAction';
@@ -14,6 +15,7 @@ class App extends Component {
     console.log(this.props.auctions);
     return (
       <div className="App">
+    <CreateNewAuction/>
         <AuctionDetails/>
       </div>
     );
