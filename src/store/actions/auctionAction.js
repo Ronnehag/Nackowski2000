@@ -17,19 +17,18 @@ export function fetchAuctions() {
     }
 }
 
-export function createAuction(auction)
-{
-    console.log(auction);
-    
+export function createAuction(auction) {
     return async dispatch => {
         const res = await fetch(auctionURL, {
-           method: 'POST',
-           headers: {"content-type": "application/json"},
-           body: JSON.stringify(auction)
+            method: 'POST',
+            headers:
+            {
+                "content-type": "application/json"
+            },
+            body: auction
         });
-
         const json = await res.json();
-        dispatch({type: CREATE_NEW_AUCTION, payload: json});
-        
+        dispatch({ type: CREATE_NEW_AUCTION, payload: json });
+
     }
 }
