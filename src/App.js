@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CreateNewAuction from './components/Auctions/CreateNewAuction';
 import AuctionDetails from './components/Auctions/AuctionDetails'
+import Home from './components/Main/Home';
 import { connect } from 'react-redux';
 import { fetchAuctions } from './store/actions/auctionAction';
 import NavigationBar from './components/Navbar/NavigationBar';
@@ -21,8 +22,9 @@ class App extends Component {
           <NavigationBar />
           <div className="container">
             <Switch>
-              <Route exact path="/newauction" component={CreateNewAuction} />
+              <Route exact path="/" component={Home} />
               <Route path="/Details" component={AuctionDetails} />
+              <Route path="/newauction" component={CreateNewAuction} />
             </Switch>
           </div>
         </div>
