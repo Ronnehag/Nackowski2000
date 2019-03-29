@@ -27,3 +27,7 @@ code {
 
   min-height: 400px;
 }
+
+.container-fluid{
+  padding: 0;
+}

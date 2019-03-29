@@ -1,16 +1,35 @@
 export const FETCH_ALL_AUCTIONS = "FETCH_ALL_AUCTIONS";
+export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
 
+const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000";
 
 export function fetchAuctions() {
     console.log("fetch action called!")
     return async dispatch => {
         try {
-            const res = await fetch("http://nackowskis.azurewebsites.net/api/Auktion/2000");
+            const res = await fetch(auctionURL);
             const json = await res.json();
             dispatch({ type: FETCH_ALL_AUCTIONS, payload: json });
 
         } catch (err) {
             console.log(err);
         }
+    }
+}
+
+export function createAuction(auction)
+{
+    console.log(auction);
+    
+    return async dispatch => {
+        const res = await fetch(auctionURL, {
+           method: 'POST',
+           headers: {"content-type": "application/json"},
+           body: JSON.stringify(auction)
+        });
+
+        const json = await res.json();
+        dispatch({type: CREATE_NEW_AUCTION, payload: json});
+        
     }
 }
