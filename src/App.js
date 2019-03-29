@@ -21,7 +21,7 @@ class App extends Component {
           <NavigationBar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={CreateNewAuction} />
+              <Route exact path="/newauction" component={CreateNewAuction} />
               <Route path="/Details" component={AuctionDetails} />
             </Switch>
           </div>

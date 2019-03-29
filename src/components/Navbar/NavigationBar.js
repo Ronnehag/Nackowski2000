@@ -18,6 +18,9 @@ class NavigationBar extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/Details">Detaljer</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/newauction">Skapa auktion</Link>
+                            </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Dropdown link
