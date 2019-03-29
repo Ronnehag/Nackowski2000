@@ -11,7 +11,7 @@ class CreateNewAuction extends Component {
         SlutDatum: "",
         Gruppkod: 2000,
         Utropspris: null,
-        SkapadAv: "TestAnvändare"
+        SkapadAv: "TestAnvandare"
     };
 
     handleChange = (event) => {
