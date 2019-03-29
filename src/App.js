@@ -15,7 +15,6 @@ class App extends Component {
     return (
       <div className="App">
         <AuctionDetails/>
-      <h3>Hello</h3>
       </div>
     );
   }
