@@ -26,34 +26,6 @@ code {
 .container-fluid{
   padding: 0;
 }
-
-/*---------------------------------------------------------------------------*/
-/*Hem*/
-img{
-  max-height: 300px;
-}
-.card{
-  min-height: 400px;
-}
-.cardSizing{
-  padding: 4px;
-}
-
-/*Skapa Auktion*/
-.createAuctionContainer{
-  padding-top: 10px;
-  padding-left: 20%;
-}
-.createAuctionForm{
-  min-width: 80%;
-  background-color: pink;
-  border: 2px solid palevioletred;
-  border-radius: 2%;
-}
-
-/*Detaljer*/
-
-
 /* NAVBAR */
 .navbar{
   padding: 0 10px 0 10px;
@@ -93,3 +65,35 @@ img{
 }
 
 /*END NAVBAR*/
+
+
+/*HOME*/
+img{
+  max-height: 300px;
+}
+.card{
+  min-height: 400px;
+}
+.cardSizing{
+  padding: 4px;
+}
+/*END HOME*/
+
+
+/*CREATE AUCTION*/
+.createAuctionContainer{
+  padding-top: 10px;
+  padding-left: 20%;
+}
+.createAuctionForm{
+  min-width: 80%;
+  background-color: pink;
+  border: 2px solid palevioletred;
+  border-radius: 2%;
+}
+/*END CREATE AUCTION*/
+
+
+/*Detaljer*/
+
+
