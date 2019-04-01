@@ -3,6 +3,7 @@ body {
   background-color: whitesmoke;
   margin: 0;
   padding: 0;
+  line-height: 1.4;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -13,9 +14,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.cardSizing{
-  padding: 4px;
-}
+
 .container {
   background-color: wheat;
   min-height: 100vh;
@@ -36,6 +35,9 @@ img{
 .card{
   min-height: 400px;
 }
+.cardSizing{
+  padding: 4px;
+}
 
 /*Skapa Auktion*/
 .createAuctionContainer{
@@ -52,3 +54,42 @@ img{
 /*Detaljer*/
 
 
+/* NAVBAR */
+.navbar{
+  padding: 0 10px 0 10px;
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.nav-custom{
+  background: rgb(88, 74, 72);
+}
+.navbar-brand{
+ color: white;
+}
+.navbar-brand:hover{
+  color: white;
+}
+.nav-link{
+  color: white;
+  padding: 15px;
+  transition: all .2s ease-in;
+}
+.nav-link:hover{
+  background: #E74C3C;
+  color: white;
+  padding: 15px;
+}
+.btn-custom{
+  background: #2980B9;
+  border: 0;
+  padding: 5px 10px;
+  color: #fff;
+  border: 1px solid #3498DB;
+  transition: all .3s ease-in;
+}
+.btn-custom:hover{
+  background: #3498DB;
+}
+
+/*END NAVBAR*/
