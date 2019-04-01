@@ -10,12 +10,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 class App extends Component {
 
   componentDidMount() {
-    console.log("Mounted")
     this.props.dispatch(fetchAuctions());
   }
 
   render() {
-    console.log(this.props.auctions);
     return (
       <Router>
         <div className="App container-fluid">
@@ -33,10 +31,5 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    auctions: state.auctions.items
-  }
-}
 
-export default connect(mapStateToProps)(App);
+export default connect()(App);
