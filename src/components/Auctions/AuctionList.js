@@ -4,14 +4,14 @@ import Auction from './Auction';
 
 class AuctionList extends React.Component {
     render() {
-        const filterdList = this.props.auctions.filter((filterdAuction) =>{
+        const filterdList = this.props.auctions.filter((filterdAuction) => {
 
         })
         const auctionList = this.props.auctions.map((auction) => {
             console.log(auction)
             return (
                 <Auction item={auction} />
-            )   
+            )
         })
         return (
             <div className="row">

@@ -8,8 +8,9 @@ export default class Auction extends React.Component {
         console.log()
 
         return (
-            <div className="col-lg-4 cardSizing">
+            <div className="col-lg-3 cardSizing">
                 <div className="card">
+                    
                     <img class="card-img-top" src="https://picsum.photos/200/300/?random" alt="Card image cap" />
                     <div className="card-body">
                         <h6 className="card-title">Titel: {this.props.item.Titel} </h6>
