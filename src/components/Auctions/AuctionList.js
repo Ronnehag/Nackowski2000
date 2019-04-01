@@ -14,7 +14,7 @@ class AuctionList extends React.Component {
             )   
         })
         return (
-            <div>
+            <div className="row">
                 {auctionList}
             </div>
         )

@@ -39,7 +39,9 @@ class CreateNewAuction extends Component {
 
     render() {
 
-        return (<div className="col-6">
+        return (
+        <div className="createAuctionContainer">
+        <div className="col-6 createAuctionForm">
             <h1>Skapa ny auktion</h1>
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
@@ -60,6 +62,7 @@ class CreateNewAuction extends Component {
                 </div>
                 <button type="submit" className="btn btn-primary">Spara</button>
             </form>
+        </div>
         </div>);
     }
 }

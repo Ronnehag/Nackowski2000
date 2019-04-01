@@ -1,3 +1,4 @@
+/*Övergripande CSS för hela sidan*/
 body {
   background-color: whitesmoke;
   margin: 0;
@@ -8,14 +9,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+.cardSizing{
+  padding: 4px;
+}
 .container {
-  text-align: center;
   background-color: wheat;
   min-height: 100vh;
   flex-direction: column;
@@ -23,11 +24,31 @@ code {
   color: black;
   max-width: 70%;
 }
-.card{
-
-  min-height: 400px;
-}
-
 .container-fluid{
   padding: 0;
 }
+
+/*---------------------------------------------------------------------------*/
+/*Hem*/
+img{
+  max-height: 300px;
+}
+.card{
+  min-height: 400px;
+}
+
+/*Skapa Auktion*/
+.createAuctionContainer{
+  padding-top: 10px;
+  padding-left: 20%;
+}
+.createAuctionForm{
+  min-width: 80%;
+  background-color: pink;
+  border: 2px solid palevioletred;
+  border-radius: 2%;
+}
+
+/*Detaljer*/
+
+
