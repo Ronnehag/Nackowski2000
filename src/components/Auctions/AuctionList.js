@@ -7,22 +7,13 @@ class AuctionList extends React.Component {
         const filterdList = this.props.auctions.filter((filterdAuction) => {
 
         })
-        const auctionList = this.props.auctions.map((auction, index ) => {
-            if((index +1 ) % 4 === 0){
-                return (
-                <div className="card-group">
-                    <Auction item={auction} key={auction.AuktionID} />
-                </div>
-                )
-            }
+        const auctionList = this.props.auctions.map((auction, index) => {
             return (
-                <div>
-                    <Auction item={auction} key={auction.AuktionID} />
-                </div>
-            )   
+                <Auction item={auction} key={auction.AuktionID} />
+            )
         })
         return (
-            <div>
+            <div className="row">
                 {auctionList}
             </div>
         )

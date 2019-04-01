@@ -21,7 +21,7 @@ code {
   flex-direction: column;
   font-size: calc(6px + 1vmin);
   color: black;
-  max-width: 70%;
+  max-width: 90%;
 }
 .container-fluid{
   padding: 0;
@@ -72,10 +72,13 @@ img{
   max-height: 200px;
 }
 .card{
-  min-height: 400px;
+  min-height: 200px;
 }
 .cardSizing{
   padding: 4px;
+}
+.card-body{
+  padding: 20px;
 }
 /*END HOME*/
 
