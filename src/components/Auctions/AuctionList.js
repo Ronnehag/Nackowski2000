@@ -10,6 +10,9 @@ class AuctionList extends React.Component {
         if (this.props.auctions.length) {
             return this.props.auctions.filter(auction => {
                 if (auction.SlutDatum > currentDate) return auction;
+            }).sort((a, b) => {
+                if (a.SlutDatum === b.SlutDatum) return 0;
+                return a.SlutDatum > b.SlutDatum ? 1 : -1;
             });
         } else {
             return [];
