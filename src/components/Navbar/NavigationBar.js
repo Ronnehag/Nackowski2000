@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import {connect} from 'react-redux';
 
 class NavigationBar extends Component {
     render() {
@@ -16,12 +17,6 @@ class NavigationBar extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Hem</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/Details">Detaljer</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/newauction">Skapa auktion</Link>
-                            </li>
                         </ul>
                         <div className="ml-auto">
                             <LoginForm />
@@ -32,5 +27,6 @@ class NavigationBar extends Component {
         )
     }
 }
+
 
 export default NavigationBar
