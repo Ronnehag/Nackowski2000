@@ -6,17 +6,9 @@ export default class AuctionDetailsView extends React.Component {
             <div>
                 <h2>Produkt</h2>
                 <div className="card">
-                    <div className="card-header">Titel</div>
-                    <div className="card-body">Beskrivning :
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
+                    <div className="card-header">{this.props.item.Titel}</div>
+                    <div className="card-body">
+                        {this.props.item.Beskrivning}
                     </div>
                     <div className="card-footer">
                         <div class="btn-group" role="group">

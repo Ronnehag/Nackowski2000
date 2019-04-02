@@ -8,6 +8,10 @@ class AuctionList extends React.Component {
 
         })
         const auctionList = this.props.auctions.map((auction, index) => {
+            if(!this.props.auctions)
+            {
+                return "loading...";
+            }
             return (
                 <Auction item={auction} key={auction.AuktionID} />
             )

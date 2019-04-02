@@ -14,9 +14,10 @@ export default class Auction extends React.Component {
             hour: "2-digit",
             minute: "2-digit"
         }
-
+       
         return (
             <div className="col-lg-3 cardSizing">
+            <Link to={`/Auctions/${this.props.item.AuktionID}`}>
                 <div className="card" style={{ position: "relative" }}>
                     <img className="card-img-top" src="https://picsum.photos/200/200/?random" alt="auktionsbild" />
                     <div className="card-body">
@@ -32,6 +33,7 @@ export default class Auction extends React.Component {
                         </div>
                     </div>
                 </div>
+                </Link>
             </div>
         );
     }
