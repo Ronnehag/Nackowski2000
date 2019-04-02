@@ -52,11 +52,11 @@ class CreateNewAuction extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="titel">Titel</label>
-                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className="form-control" />
+                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className="form-control" required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="beskrivning">Beskrivning</label>
-                            <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" id="beskrivning" rows="5"></textarea>
+                            <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" id="beskrivning" rows="5" required ></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="slutdatum" className="col-2 col-form-label">Slutdatum</label>

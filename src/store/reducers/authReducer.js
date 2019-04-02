@@ -10,7 +10,6 @@ const intialState = {
 };
 
 export default function authReducer(state = intialState, action) {
-    console.log(action);
     switch (action.type) {
         case LOGIN_USER:
             return {
@@ -21,7 +20,13 @@ export default function authReducer(state = intialState, action) {
                 }
             }
         case LOGOUT_USER:
-            break;
+            return {
+                ...state,
+                user: {
+                    username: "",
+                    isLoggedIn: false
+                }
+            }
 
         default: return state;
     }
