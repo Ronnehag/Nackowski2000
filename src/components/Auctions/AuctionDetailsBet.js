@@ -1,7 +1,25 @@
 import React from 'react';
 
 export default class AuctionDetailsBet extends React.Component {
+    
+    getBid = () => {
+        if(!this.props.bids)
+        {
+            return (<span>Finns inga bud!</span>)
+        }
+        this.props.bids.map((k => {
+            return (
+                <div>
+                    <li className="list-group-item">{k.Budgivare} {k.Summa}kr</li>
+                </div>
+            );
+        }))
+    }
+
     render() {
+        console.log(this.props.bids)
+       
+        
         var date = new Date(this.props.item.SlutDatum.replace('T', ' '));
         const dateOptions = {
             hour12: false,
@@ -15,6 +33,7 @@ export default class AuctionDetailsBet extends React.Component {
         }
 
         return (
+            
             <div>
                 <h2>Budgivare</h2>
                 <div className="card">
@@ -28,9 +47,7 @@ export default class AuctionDetailsBet extends React.Component {
                     <h6>Budgivare</h6>
                     <div className="card-body">
                         <ul className="list-group">
-                            <li className="list-group-item active">Robert (Högsta budgivare) Nuvarande bud:xxx</li>
-                            <li className="list-group-item">Budgivare 2 Nuvarande bud: xxx</li>
-                            <li className="list-group-item">Budgivare 3 Nuvarande bud: xxx</li>
+                            {this.getBid()}
                         </ul>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class AuctionDetails extends React.Component {
 
     render() {
-        console.log(this.props.auctions)
+        const {Bud} = this.props.auctions;
         return (
             <div>
                 <div className="row">
@@ -13,7 +13,7 @@ class AuctionDetails extends React.Component {
                         <AuctionDetailsView item={this.props.auctions} history={this.props.history} />
                     </div>
                     <div className="col-lg-6">
-                        <AuctionDetailsBet item={this.props.auctions} />
+                        <AuctionDetailsBet item={this.props.auctions} bids={Bud} />
                     </div>
                 </div>
             </div>
