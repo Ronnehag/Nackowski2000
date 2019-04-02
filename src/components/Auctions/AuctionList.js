@@ -7,10 +7,9 @@ class AuctionList extends React.Component {
         const filterdList = this.props.auctions.filter((filterdAuction) => {
 
         })
-        const auctionList = this.props.auctions.map((auction) => {
-            console.log(auction)
+        const auctionList = this.props.auctions.map((auction, index) => {
             return (
-                <Auction item={auction} />
+                <Auction item={auction} key={auction.AuktionID} />
             )
         })
         return (

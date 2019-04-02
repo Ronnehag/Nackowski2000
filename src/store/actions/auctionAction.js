@@ -4,7 +4,6 @@ export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
 const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000";
 
 export function fetchAuctions() {
-    console.log("fetch action called!")
     return async dispatch => {
         try {
             const res = await fetch(auctionURL);
