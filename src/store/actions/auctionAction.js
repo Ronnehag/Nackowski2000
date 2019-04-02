@@ -13,15 +13,15 @@ export function fetchAuctions() {
     return async dispatch => {
         try {
             const res = await fetch(auctionURL);
-            const json = await res.json();
-            json.forEach(async (obj) => {
+            const auctions = await res.json();
+            auctions.forEach(async (obj) => {
                 const res = await fetch(bidURL + obj["AuktionID"]);
-                const json = await res.json();
-                if (json.length) {
-                    obj.Bud = json;
+                const bids = await res.json();
+                if (bids.length) {
+                    obj.Bud = bids;
                 }
             });
-            dispatch({ type: FETCH_ALL_AUCTIONS, payload: json });
+            dispatch({ type: FETCH_ALL_AUCTIONS, payload: auctions });
         } catch (err) {
             console.log(err);
         }
