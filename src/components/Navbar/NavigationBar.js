@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import SearchForm from './SearchForm';
 
 class NavigationBar extends Component {
     render() {
@@ -23,7 +24,8 @@ class NavigationBar extends Component {
                                 <Link className="nav-link" to="/newauction">Skapa auktion</Link>
                             </li>
                         </ul>
-                        <div className="ml-auto">
+                        <SearchForm/>
+                        <div className="ml-auto">                            
                             <LoginForm />
                         </div>
                     </div>
