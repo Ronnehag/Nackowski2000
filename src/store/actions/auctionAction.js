@@ -37,37 +37,26 @@ export function createAuction(auction) {
     }
 }
 
-export function deleteAuction(id)
-{
+export function deleteAuction(id) {
     console.log(id);
     return async dispatch => {
-        try{
-             const res = await fetch(auctionURL + id, {
-            method: 'DELETE'
-        });
-        dispatch({ type: DELETE_AUCTION, AuktionID: id });
+        try {
+            const res = await fetch(auctionURL + id, {
+                method: 'DELETE'
+            });
+            dispatch({ type: DELETE_AUCTION, AuktionID: id });
         }
-       catch(err)
-       {
-           console.log(err);
-       }
+        catch (err) {
+            console.log(err);
+        }
 
     }
 }
-export function searchAuction(searchValue)
-{
+export function searchAuction(searchValue) {
     return async dispatch => {
-        try {
-            const res = await fetch(auctionURL);
-            const json = await res.json();
-            const filteredJson = json.filter(function(auction){
-                return auction.includes(searchValue)
-            })
-            dispatch({ type: FILTERED_AUCTIONS, payload: filteredJson });
 
-        } catch (err) {
-            console.log(err);
-        }
+        dispatch({ type: FILTERED_AUCTIONS, payload: searchValue });
+
     }
 
 }
