@@ -2,6 +2,9 @@ export const FETCH_ALL_AUCTIONS = "FETCH_ALL_AUCTIONS";
 export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
 export const DELETE_AUCTION = "DELETE_AUCTION";
 export const FILTERED_AUCTIONS = "FILTERED_AUCTIONS"
+export const FETCH_BETS = "FETCH_BETS";
+export const PLACE_BET = "PLACE_BET";
+
 
 const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000/";
 
@@ -10,8 +13,14 @@ export function fetchAuctions() {
         try {
             const res = await fetch(auctionURL);
             const json = await res.json();
+            json.forEach(async (obj) => {
+                const res = await fetch("http://nackowskis.azurewebsites.net/api/bud/2000/" + obj["AuktionID"]);
+                const json = await res.json();
+                if (json.length) {
+                    obj.Bud = json;
+                }
+            });
             dispatch({ type: FETCH_ALL_AUCTIONS, payload: json });
-
         } catch (err) {
             console.log(err);
         }
@@ -37,37 +46,26 @@ export function createAuction(auction) {
     }
 }
 
-export function deleteAuction(id)
-{
+export function deleteAuction(id) {
     console.log(id);
     return async dispatch => {
-        try{
-             const res = await fetch(auctionURL + id, {
-            method: 'DELETE'
-        });
-        dispatch({ type: DELETE_AUCTION, AuktionID: id });
+        try {
+            const res = await fetch(auctionURL + id, {
+                method: 'DELETE'
+            });
+            dispatch({ type: DELETE_AUCTION, AuktionID: id });
         }
-       catch(err)
-       {
-           console.log(err);
-       }
+        catch (err) {
+            console.log(err);
+        }
 
     }
 }
-export function searchAuction(searchValue)
-{
+export function searchAuction(searchValue) {
     return async dispatch => {
-        try {
-            const res = await fetch(auctionURL);
-            const json = await res.json();
-            const filteredJson = json.filter(function(auction){
-                return auction.includes(searchValue)
-            })
-            dispatch({ type: FILTERED_AUCTIONS, payload: filteredJson });
 
-        } catch (err) {
-            console.log(err);
-        }
+        dispatch({ type: FILTERED_AUCTIONS, payload: searchValue });
+
     }
 
 }

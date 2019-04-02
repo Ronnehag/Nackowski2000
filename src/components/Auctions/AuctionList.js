@@ -44,7 +44,7 @@ class AuctionList extends React.Component {
 const mapStateToProps = state => {
     return {
         auctions: state.auctions.items,
-        filter: state.auctions.filteredItems
+        filter: state.auctions.filter
     }
 }
 export default connect(mapStateToProps)(AuctionList);
