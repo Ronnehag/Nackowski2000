@@ -16,7 +16,7 @@ class SearchForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setState(() => this.props.dispatch(searchAuction(this.state))
+        this.props.dispatch(searchAuction(this.state.searchText)
         )
     }
 

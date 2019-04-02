@@ -20,7 +20,7 @@ export function fetchAuctions() {
                 if (bids.length) {
                     obj.Bud = bids;
                 }
-            });
+            },);
             dispatch({ type: FETCH_ALL_AUCTIONS, payload: auctions });
         } catch (err) {
             console.log(err);
