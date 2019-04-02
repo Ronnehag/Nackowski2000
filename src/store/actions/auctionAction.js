@@ -17,7 +17,6 @@ export function fetchAuctions() {
 }
 
 export function createAuction(auction) {
-    console.log(auction);
     return async dispatch => {
         try {
             const res = await fetch(auctionURL, {
@@ -29,7 +28,6 @@ export function createAuction(auction) {
                 }
             });
             const json = await res.json();
-            console.log(json);
             dispatch({ type: CREATE_NEW_AUCTION, payload: json });
         } catch (err) {
             console.log(err);

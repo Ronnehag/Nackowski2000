@@ -2,16 +2,26 @@ import {
     LOGIN_USER, LOGOUT_USER
 } from '../actions/authAction';
 
-const intialState = { };
+const intialState = {
+    user: {
+        username: "",
+        isLoggedIn: false
+    }
+};
 
 export default function authReducer(state = intialState, action) {
     console.log(action);
-    switch(action.type){
+    switch (action.type) {
         case LOGIN_USER:
-        break;
-
+            return {
+                ...state,
+                user: {
+                    username: action.payload,
+                    isLoggedIn: true
+                }
+            }
         case LOGOUT_USER:
-        break;
+            break;
 
         default: return state;
     }
