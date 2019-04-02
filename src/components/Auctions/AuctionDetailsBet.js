@@ -5,9 +5,10 @@ export default class AuctionDetailsBet extends React.Component {
     getBid = () => {
         if(!this.props.bids)
         {
-            return (<span>Finns inga bud!</span>)
+            return "Finns inga bud!"
         }
         this.props.bids.map((k => {
+            console.log(k.Budgivare)
             return (
                 <div>
                     <li className="list-group-item">{k.Budgivare} {k.Summa}kr</li>
@@ -15,10 +16,7 @@ export default class AuctionDetailsBet extends React.Component {
             );
         }))
     }
-
     render() {
-        console.log(this.props.bids)
-       
         
         var date = new Date(this.props.item.SlutDatum.replace('T', ' '));
         const dateOptions = {
