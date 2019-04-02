@@ -44,13 +44,12 @@ class AuctionList extends React.Component {
                 <Auction item={auction} key={auction.AuktionID} />
             )
         }) : (
-                <div className="row">
-                    <div className="col-6 text-center mt-5">
-                        <div className="spinner-grow text-primary" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
+                <div className="col-6 offset-6 mt-5 mt-10">
+                    <div className="spinner-grow text-primary" role="status">
+                        <span className="sr-only">Loading...</span>
                     </div>
-                </div>)
+                </div>
+            )
 
         return (
             <div className="row">

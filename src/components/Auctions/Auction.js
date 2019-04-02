@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 export default class Auction extends React.Component {
 
+    formatPrice = () => {
+        let price = this.props.item.Utropspris;
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
     countBids = () => {
-        console.log(this.props.item.Bud);
-        if (this.props.item.Bud) {
-            return this.props.item.Bud.length ?
-                (<span>{this.props.item.Bud.length} bud</span>)
-                : <span>Inga bud</span>
-        }
+        return this.props.item.Bud.length ?
+            (<span>{this.props.item.Bud.length} bud</span>)
+            : <span>Inga bud</span>
     }
 
     render() {
@@ -34,7 +36,7 @@ export default class Auction extends React.Component {
                             <p className="card-text non-link">{this.props.item.Beskrivning}</p>
                             <div className="row non-link">
                                 <div className="col-6 text-left">
-                                    <p id="price"><strong>{this.props.item.Utropspris} kr</strong> {this.countBids()}</p>
+                                    <p id="price"><strong>{this.formatPrice()} kr</strong> {this.countBids()}</p>
                                 </div>
                                 <div className="col-6 text-right">
                                     <p id="date-tag">{date.toLocaleString("sv-SE", dateOptions)}</p>
