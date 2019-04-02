@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 export default class Auction extends React.Component {
 
-
     countBids = () => {
-        console.log(this.props.item);
+        console.log(this.props.item.Bud);
         if (this.props.item.Bud) {
             return this.props.item.Bud.length ?
                 (<span>{this.props.item.Bud.length} bud</span>)

@@ -17,30 +17,29 @@ class AuctionList extends React.Component {
         } else {
             return [];
         }
-    } 
-    
+    }
+
     searchResult = () => {
         return this.props.auctions.filter(auction => {
-            if(auction.Titel.includes(this.props.filter))
-            return auction;          
-        });       
+            if (auction.Titel.includes(this.props.filter))
+                return auction;
+        });
 
     }
 
     render() {
-                
+
         let filteredList = [];
 
-        if(this.props.filter)
-        {
+        if (this.props.filter) {
             filteredList = this.searchResult();
         }
-        else
-        {
+        else {
             filteredList = this.filteredList();
         }
-        
-        const auctionList = filteredList.length ? filteredList.map((auction) => {
+
+        const auctionList = filteredList.length > 0 ? filteredList.map((auction) => {
+            console.log(auction.Bud);
             return (
                 <Auction item={auction} key={auction.AuktionID} />
             )
