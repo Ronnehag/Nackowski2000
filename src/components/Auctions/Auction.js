@@ -26,11 +26,12 @@ export default class Auction extends React.Component {
             minute: "2-digit"
         }
 
+        let rand = Math.floor(Math.random() * 200);
         return (
             <div className="col-lg-3 cardSizing non-link">
                 <Link to={`/Auctions/${this.props.item.AuktionID}`}>
                     <div className="card">
-                        <img className="card-img-top" src="https://picsum.photos/200/200/?random" alt="auktionsbild" />
+                        <img className="card-img-top" src={`https://picsum.photos/200/200/?image=${rand}`} alt="auktionsbild" />
                         <div className="card-body">
                             <h6 className="card-title">{this.props.item.Titel} </h6>
                             <p className="card-text non-link">{this.props.item.Beskrivning}</p>
