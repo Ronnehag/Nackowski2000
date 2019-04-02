@@ -1,6 +1,12 @@
 import React from 'react';
-
-export default class AuctionDetailsView extends React.Component {
+import {connect} from 'react-redux';
+import {deleteAuction} from '../../store/actions/auctionAction';
+class AuctionDetailsView extends React.Component {
+    handleClick = () => {
+        const id = this.props.item.AuktionID;
+        this.props.dispatch(deleteAuction(id));
+        this.props.history.push({pathname: "/"});
+    }
     render() {
         var date = new Date(this.props.item.StartDatum.replace('T', ' '));
         const dateOptions = {
@@ -13,6 +19,7 @@ export default class AuctionDetailsView extends React.Component {
             hour: "2-digit",
             minute: "2-digit"
         }
+        
         return (
             <div>
                 <h2>Produkt</h2>
@@ -32,7 +39,7 @@ export default class AuctionDetailsView extends React.Component {
                     </div>
                     <div className="card-footer">
                         <div className="btn-group" role="group">
-                            <button type="button" className="btn btn-primary btn-md">Ta bort</button>
+                            <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Ta bort</button>
                             <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
                         </div>
                     </div>
@@ -41,3 +48,4 @@ export default class AuctionDetailsView extends React.Component {
         )
     }
 }
+export default connect()(AuctionDetailsView)

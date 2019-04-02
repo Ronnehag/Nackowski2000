@@ -1,7 +1,8 @@
 export const FETCH_ALL_AUCTIONS = "FETCH_ALL_AUCTIONS";
 export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
+export const DELETE_AUCTION = "DELETE_AUCTION";
 
-const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000";
+const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000/";
 
 export function fetchAuctions() {
     return async dispatch => {
@@ -32,5 +33,23 @@ export function createAuction(auction) {
         } catch (err) {
             console.log(err);
         }
+    }
+}
+
+export function deleteAuction(id)
+{
+    console.log(id);
+    return async dispatch => {
+        try{
+             const res = await fetch(auctionURL + id, {
+            method: 'DELETE'
+        });
+        dispatch({ type: DELETE_AUCTION, AuktionID: id });
+        }
+       catch(err)
+       {
+           console.log(err);
+       }
+
     }
 }

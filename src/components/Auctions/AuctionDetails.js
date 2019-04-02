@@ -10,7 +10,7 @@ class AuctionDetails extends React.Component {
             <div>
                 <div className="row">
                     <div className="col-lg-6">
-                        <AuctionDetailsView item={this.props.auctions} />
+                        <AuctionDetailsView item={this.props.auctions} history={this.props.history} />
                     </div>
                     <div className="col-lg-6">
                         <AuctionDetailsBet item={this.props.auctions} />
