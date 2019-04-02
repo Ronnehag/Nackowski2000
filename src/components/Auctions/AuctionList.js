@@ -46,7 +46,7 @@ class AuctionList extends React.Component {
             )
         }) : (
                 <div className="row">
-                    <div className="col-6 col-offset-6">
+                    <div className="col-6 text-center mt-5">
                         <div className="spinner-grow text-primary" role="status">
                             <span className="sr-only">Loading...</span>
                         </div>

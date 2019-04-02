@@ -15,6 +15,21 @@ code {
     monospace;
 }
 
+.non-link{
+  color:black;
+}
+.non-link a:hover{
+  text-decoration: none;
+  color: black;
+}
+.card:hover h6{
+  color: #146ED0;
+}
+.card h6:hover{
+  color: #146ED0;
+  text-decoration: underline;
+}
+
 .container {
   background-color: wheat;
   min-height: 100vh;
