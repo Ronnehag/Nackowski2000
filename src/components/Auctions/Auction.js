@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 export default class Auction extends React.Component {
 
     render() {
@@ -10,7 +11,6 @@ export default class Auction extends React.Component {
         return (
             <div className="col-lg-3 cardSizing">
                 <div className="card">
-                    
                     <img class="card-img-top" src="https://picsum.photos/200/300/?random" alt="Card image cap" />
                     <div className="card-body">
                         <h6 className="card-title">Titel: {this.props.item.Titel} </h6>
@@ -21,8 +21,6 @@ export default class Auction extends React.Component {
                         <li className="list-group-item"></li>
                     </ul>
                 </div>
-
-
             </div>
         );
     }

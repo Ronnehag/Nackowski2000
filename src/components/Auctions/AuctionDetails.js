@@ -1,7 +1,8 @@
 import React from 'react';
 import AuctionDetailsView from './AuctionDetailsView';
 import AuctionDetailsBet from './AuctionDetailsBet';
-export default class AuctionDetails extends React.Component {
+import {connect} from 'react-redux';
+class AuctionDetails extends React.Component {
 
     render() {
         return (
@@ -18,3 +19,7 @@ export default class AuctionDetails extends React.Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return { auctions: state.auctions.items }
+}
+// export default connect(mapStateToProps)(AuctionList);
