@@ -2,16 +2,26 @@ export const FETCH_ALL_AUCTIONS = "FETCH_ALL_AUCTIONS";
 export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
 export const DELETE_AUCTION = "DELETE_AUCTION";
 export const FILTERED_AUCTIONS = "FILTERED_AUCTIONS"
+export const FETCH_BETS = "FETCH_BETS";
+export const PLACE_BET = "PLACE_BET";
+
 
 const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000/";
+const bidURL = "http://nackowskis.azurewebsites.net/api/bud/2000/";
 
 export function fetchAuctions() {
     return async dispatch => {
         try {
             const res = await fetch(auctionURL);
-            const json = await res.json();
-            dispatch({ type: FETCH_ALL_AUCTIONS, payload: json });
-
+            const auctions = await res.json();
+            auctions.forEach(async (obj) => {
+                const res = await fetch(bidURL + obj["AuktionID"]);
+                const bids = await res.json();
+                if (bids.length) {
+                    obj.Bud = bids;
+                }
+            });
+            dispatch({ type: FETCH_ALL_AUCTIONS, payload: auctions });
         } catch (err) {
             console.log(err);
         }

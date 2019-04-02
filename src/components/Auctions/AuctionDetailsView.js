@@ -7,7 +7,11 @@ class AuctionDetailsView extends React.Component {
         this.props.dispatch(deleteAuction(id));
         this.props.history.push({pathname: "/"});
     }
+    validateUser = () => {
+    
+    }
     render() {
+
         var date = new Date(this.props.item.StartDatum.replace('T', ' '));
         const dateOptions = {
             hour12: false,
@@ -42,6 +46,7 @@ class AuctionDetailsView extends React.Component {
                             <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Ta bort</button>
                             <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
                         </div>
+                        
                     </div>
                 </div>
             </div>
