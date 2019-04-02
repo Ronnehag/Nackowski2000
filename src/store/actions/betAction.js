@@ -1,0 +1,3 @@
+export const FETCH_ALL_AUCTIONS = "FETCH_ALL_BETS";
+
+
