@@ -18,7 +18,8 @@ class NavigationBar extends Component {
                                 <Link className="nav-link" to="/">Hem</Link>
                             </li>
                         </ul>
-                        <div className="ml-auto">
+                        <SearchForm/>
+                        <div className="ml-auto">                            
                             <LoginForm />
                         </div>
                     </div>
