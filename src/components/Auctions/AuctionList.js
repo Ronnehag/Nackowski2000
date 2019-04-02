@@ -10,6 +10,9 @@ class AuctionList extends React.Component {
         if (this.props.auctions.length) {
             return this.props.auctions.filter(auction => {
                 if (auction.SlutDatum > currentDate) return auction;
+            }).sort((a, b) => {
+                if (a.SlutDatum === b.SlutDatum) return 0;
+                return a.SlutDatum > b.SlutDatum ? 1 : -1;
             });
         } else {
             return [];
@@ -22,13 +25,14 @@ class AuctionList extends React.Component {
             return (
                 <Auction item={auction} key={auction.AuktionID} />
             )
-        }) : (<div className="row">
-            <div className="col-6 col-offset-6">
-                <div className="spinner-grow text-primary" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        </div>)
+        }) : (
+                <div className="row">
+                    <div className="col-6 col-offset-6">
+                        <div className="spinner-grow text-primary" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>)
 
         return (
             <div className="row">
@@ -38,6 +42,8 @@ class AuctionList extends React.Component {
     }
 }
 const mapStateToProps = state => {
-    return { auctions: state.auctions.items }
+    return {
+        auctions: state.auctions.items
+    }
 }
 export default connect(mapStateToProps)(AuctionList);
