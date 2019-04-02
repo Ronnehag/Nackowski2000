@@ -22,6 +22,7 @@ export default function auctionReducer(state = initialState, action) {
             return {
                 ...state,
                 items: state.items.filter(a=>a.AuktionID !== action.AuktionID)
+            }
         case FILTERED_AUCTIONS:
             return{
                 ...state,
