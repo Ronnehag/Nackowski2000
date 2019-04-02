@@ -7,6 +7,7 @@ export const PLACE_BET = "PLACE_BET";
 
 
 const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000/";
+const bidURL = "http://nackowskis.azurewebsites.net/api/bud/2000/";
 
 export function fetchAuctions() {
     return async dispatch => {
@@ -14,7 +15,7 @@ export function fetchAuctions() {
             const res = await fetch(auctionURL);
             const json = await res.json();
             json.forEach(async (obj) => {
-                const res = await fetch("http://nackowskis.azurewebsites.net/api/bud/2000/" + obj["AuktionID"]);
+                const res = await fetch(bidURL + obj["AuktionID"]);
                 const json = await res.json();
                 if (json.length) {
                     obj.Bud = json;
