@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import { connect } from 'react-redux';
 import SearchForm from './SearchForm';
+import SignedInLinks from './SignedInLinks';
 
 class NavigationBar extends Component {
     render() {
+        const { username, isLoggedIn } = this.props.user;
         return (
             <div>
                 <nav className="navbar navbar-expand-lg  nav-custom">
@@ -17,16 +20,10 @@ class NavigationBar extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Hem</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/Details">Detaljer</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/newauction">Skapa auktion</Link>
-                            </li>
                         </ul>
-                        <SearchForm/>
-                        <div className="ml-auto">                            
-                            <LoginForm />
+                        <SearchForm />
+                        <div className="ml-auto">
+                            {isLoggedIn ? <SignedInLinks username={username} /> : <LoginForm />}
                         </div>
                     </div>
                 </nav>
@@ -35,4 +32,11 @@ class NavigationBar extends Component {
     }
 }
 
-export default NavigationBar
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth.user
+    }
+};
+
+
+export default connect(mapStateToProps)(NavigationBar);

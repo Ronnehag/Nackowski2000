@@ -18,16 +18,19 @@ export function fetchAuctions() {
 
 export function createAuction(auction) {
     return async dispatch => {
-        const res = await fetch(auctionURL, {
-            method: 'POST',
-            headers:
-            {
-                "content-type": "application/json"
-            },
-            body: auction
-        });
-        const json = await res.json();
-        dispatch({ type: CREATE_NEW_AUCTION, payload: json });
-
+        try {
+            const res = await fetch(auctionURL, {
+                method: 'POST',
+                body: JSON.stringify(auction),
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+            });
+            const json = await res.json();
+            dispatch({ type: CREATE_NEW_AUCTION, payload: json });
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
