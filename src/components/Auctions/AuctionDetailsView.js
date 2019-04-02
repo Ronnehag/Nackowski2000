@@ -11,7 +11,7 @@ export default class AuctionDetailsView extends React.Component {
                         {this.props.item.Beskrivning}
                     </div>
                     <div className="card-footer">
-                        <div class="btn-group" role="group">
+                        <div className="btn-group" role="group">
                             <button type="button" className="btn btn-primary btn-md">Ta bort</button>
                             <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
                         </div>
