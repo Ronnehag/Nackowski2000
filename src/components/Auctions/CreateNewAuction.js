@@ -12,7 +12,6 @@ class CreateNewAuction extends Component {
         SlutDatum: "",
         Gruppkod: 2000,
         Utropspris: 0,
-        SkapadAv: "TestAnvandare"
     };
 
     handleChange = (event) => {
@@ -23,18 +22,19 @@ class CreateNewAuction extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        // TODO: Validering så man inte kan submitta en tom form
+
         this.setState({
             Utropspris: parseInt(this.state.Utropspris),
-            StartDatum: moment().format("YYYY-MM-DDTHH:mm:ss")
+            StartDatum: moment().format("YYYY-MM-DDTHH:mm:ss"),
+            SkapadAv: sessionStorage.getItem("user")
         }, () => {
             this.props.dispatch(createAuction(this.state))
+            this.props.history.push({ pathname: "/" });
         });
 
-        // Pusha tillbaka till "Home" Route efter submit.
-    }
 
-    getCurrentDate = () => {
-        return new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString().split('.')[0];
+
     }
 
     componentDidMount() {
@@ -44,6 +44,7 @@ class CreateNewAuction extends Component {
 
     render() {
 
+
         return (
             <div className="createAuctionContainer">
                 <div className="col-6 createAuctionForm">
@@ -51,11 +52,11 @@ class CreateNewAuction extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="titel">Titel</label>
-                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className="form-control" />
+                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className="form-control" required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="beskrivning">Beskrivning</label>
-                            <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" id="beskrivning" rows="5"></textarea>
+                            <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" id="beskrivning" rows="5" required ></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="slutdatum" className="col-2 col-form-label">Slutdatum</label>

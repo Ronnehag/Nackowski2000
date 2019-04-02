@@ -1,21 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import Auction from './Auction';
 
 class AuctionList extends React.Component {
-    render() {
-        const filterdList = this.props.auctions.filter((filterdAuction) => {
 
-        })
-        const auctionList = this.props.auctions.map((auction, index) => {
-            if(!this.props.auctions)
-            {
-                return "loading...";
-            }
+    filteredList = () => {
+        const currentDate = moment().format("YYYY-MM-DDTHH:mm:ss");
+        if (this.props.auctions.length) {
+            return this.props.auctions.filter(auction => {
+                if (auction.SlutDatum > currentDate) return auction;
+            });
+        } else {
+            return [];
+        }
+    }
+
+    render() {
+        const filteredList = this.filteredList();
+        const auctionList = filteredList.length ? filteredList.map((auction) => {
             return (
                 <Auction item={auction} key={auction.AuktionID} />
             )
-        })
+        }) : (<div className="row">
+            <div className="col-6 col-offset-6">
+                <div className="spinner-grow text-primary" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>)
+
         return (
             <div className="row">
                 {auctionList}
