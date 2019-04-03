@@ -8,7 +8,7 @@ export const PLACE_BET = "PLACE_BET";
 export const UPDATE_AUCTION = "UPDATE_AUCTION";
 
 
-const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000";
+const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000/";
 const bidURL = "http://nackowskis.azurewebsites.net/api/bud/2000/";
 
 export function fetchAuctions() {
@@ -65,15 +65,22 @@ export function deleteAuction(id) {
 
     }
 }
-export function updateAuction(id) {
+export function updateAuction(auction) {
+    console.log("UPDATE", auction);
     return async dispatch => {
-        try{
-            const res = await fetch(auctionURL + id, {
-                method: 'PUT'
+        try {
+            const res = await fetch(auctionURL + auction.AuktionID, {
+                method: 'PUT',
+                body: JSON.stringify(auction),
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
             });
-            dispatch({type: UPDATE_AUCTION, AuktionID: id});
+
+            dispatch({ type: UPDATE_AUCTION, payload: auction });
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
@@ -96,6 +103,7 @@ export function fetchSingleAuction(id) {
             if (bids) {
                 auction.Bud = bids;
             }
+            console.log("fetchsingle", auction);
             dispatch({ type: FETCH_SINGLE_AUCTION, payload: auction });
         } catch (err) {
             console.log(err);

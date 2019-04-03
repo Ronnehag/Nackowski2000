@@ -5,7 +5,7 @@ import {
     FILTERED_AUCTIONS,
     FETCH_SINGLE_AUCTION,
     UPDATE_AUCTION
-    
+
 } from '../actions/auctionAction';
 
 const initialState = {
@@ -47,10 +47,10 @@ export default function auctionReducer(state = initialState, action) {
                 })
             }
         case UPDATE_AUCTION:
-            return{
+            let values = state.items.map(auction => auction.AuktionID === action.payload.AuktionID ? action.payload : auction);
+            return {
                 ...state,
-                items: [action.payload, ...state.items]
-
+                items: values
             }
 
         default: return state;

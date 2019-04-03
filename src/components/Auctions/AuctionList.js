@@ -19,24 +19,8 @@ class AuctionList extends React.Component {
         }
     }
 
-    searchResult = () => {
-        return this.props.auctions.filter(auction => {
-            if (auction.Titel.includes(this.props.filter))
-                return auction;
-        });
-
-    }
-
     render() {
-
-        let filteredList = [];
-
-        if (this.props.filter) {
-            filteredList = this.searchResult();
-        }
-        else {
-            filteredList = this.filteredList();
-        }
+        const filteredList = this.filteredList();
 
         const auctionList = filteredList.length > 0 ? filteredList.map((auction) => {
             return (
@@ -60,7 +44,6 @@ class AuctionList extends React.Component {
 const mapStateToProps = state => {
     return {
         auctions: state.auctions.items,
-        filter: state.auctions.filter
     }
 }
 export default connect(mapStateToProps)(AuctionList);

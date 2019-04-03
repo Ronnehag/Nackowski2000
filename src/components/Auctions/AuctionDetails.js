@@ -3,6 +3,7 @@ import AuctionDetailsView from './AuctionDetailsView';
 import AuctionDetailsBet from './AuctionDetailsBet';
 import { connect } from 'react-redux';
 import { fetchSingleAuction } from '../../store/actions/auctionAction';
+
 class AuctionDetails extends React.Component {
 
     componentDidMount() {
@@ -12,6 +13,7 @@ class AuctionDetails extends React.Component {
 
     render() {
         if (this.props.auction !== null) {
+            console.log(this.props.auction);
             const { Bud } = this.props.auction;
             return (
                 <div>
