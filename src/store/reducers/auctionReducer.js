@@ -9,14 +9,14 @@ import {
 const initialState = {
     items: [],
     filter: '',
-    auction: null
+    auction: null,
+    filteredList: []
 }
 
 export default function auctionReducer(state = initialState, action) {
 
     switch (action.type) {
         case FETCH_SINGLE_AUCTION:
-            console.log(action.payload);
             return {
                 ...state,
                 auction: action.payload
@@ -39,7 +39,10 @@ export default function auctionReducer(state = initialState, action) {
         case FILTERED_AUCTIONS:
             return {
                 ...state,
-                filter: action.payload
+                filteredList: state.items.filter(a => {
+                    if(a.Titel.includes(action.payload))
+                    return a;
+                })
             }
 
         default: return state;
