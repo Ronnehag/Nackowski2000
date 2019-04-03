@@ -2,7 +2,7 @@ import { FETCH_ALL_AUCTIONS, CREATE_NEW_AUCTION, DELETE_AUCTION,FILTERED_AUCTION
 
 const initialState = {
     items: [],
-    filter: ''
+    filteredList: []
 }
 
 export default function auctionReducer(state = initialState, action) {
@@ -26,7 +26,10 @@ export default function auctionReducer(state = initialState, action) {
         case FILTERED_AUCTIONS:
             return{
                 ...state,
-                filter: action.payload
+                filteredList: state.items.filter(a => {
+                    if(a.Titel.includes(action.payload))
+                    return a;
+                })
             }
         case UPDATE_AUCTION:
             return{

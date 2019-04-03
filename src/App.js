@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CreateNewAuction from './components/Auctions/CreateNewAuction';
-import AuctionDetails from './components/Auctions/AuctionDetails'
+import AuctionDetails from './components/Auctions/AuctionDetails';
+import SearchList from './components/Auctions/SearchList'
 import Home from './components/Main/Home';
 import UpdateAuction from './components/Auctions/UpdateAuction';
 import { connect } from 'react-redux';
@@ -25,6 +26,7 @@ class App extends Component {
               <Route path={`/Auctions/:id`} component={AuctionDetails} />
               <Route path={`/Update/:id`} component={UpdateAuction}/>
               <Route path="/newauction" component={CreateNewAuction} />
+              <Route path={`/Search/:searchtext`} component={SearchList}/>
             </Switch>
           </div>
         </div>
