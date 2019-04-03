@@ -24,7 +24,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path={`/Auctions/:id`} component={AuctionDetails} />
               <Route path="/newauction" component={CreateNewAuction} />
-              <Route path={`/Search/:searchtext`} component={SearchList}/>
+              <Route path="/search" component={SearchList}/>
             </Switch>
           </div>
         </div>
