@@ -33,8 +33,6 @@ class CreateNewAuction extends Component {
             this.props.history.push({ pathname: "/" });
         });
 
-
-
     }
 
     componentDidMount() {

@@ -7,7 +7,7 @@ export const FETCH_BETS = "FETCH_BETS";
 export const PLACE_BET = "PLACE_BET";
 
 
-const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000/";
+const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000";
 const bidURL = "http://nackowskis.azurewebsites.net/api/bud/2000/";
 
 export function fetchAuctions() {

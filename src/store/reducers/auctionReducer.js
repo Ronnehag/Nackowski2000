@@ -40,8 +40,8 @@ export default function auctionReducer(state = initialState, action) {
             return {
                 ...state,
                 filteredList: state.items.filter(a => {
-                    if(a.Titel.includes(action.payload))
-                    return a;
+                    if (a.Titel.includes(action.payload))
+                        return a;
                 })
             }
 

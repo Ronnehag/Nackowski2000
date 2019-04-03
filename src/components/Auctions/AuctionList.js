@@ -39,7 +39,6 @@ class AuctionList extends React.Component {
         }
 
         const auctionList = filteredList.length > 0 ? filteredList.map((auction) => {
-            console.log(auction.Bud);
             return (
                 <Auction item={auction} key={auction.AuktionID} />
             )
