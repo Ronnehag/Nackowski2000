@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { searchAuction } from '../../store/actions/auctionAction';
+import { Redirect } from 'react-router-dom'
 
-class SearchForm extends Component {
+class SearchForm extends React.Component {
 
     state = {
-        searchText: ''
+        searchText: '',
+        redirect: false
     }
 
     handleChange = (event) => {
@@ -16,11 +18,18 @@ class SearchForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.dispatch(searchAuction(this.state.searchText)
-        )
+        this.props.dispatch(searchAuction(this.state.searchText))
+        this.setState({ redirect: true });
     }
 
     render() {
+
+        const { redirect } = this.state;
+
+        if (redirect) {
+            return (<Redirect to="/search" />)
+        }
+
         return (<div className="ml-2">
             <form onSubmit={this.handleSubmit} className="form-inline">
                 <div className="input-group">

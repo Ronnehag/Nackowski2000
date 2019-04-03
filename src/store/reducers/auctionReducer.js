@@ -1,12 +1,28 @@
-import { FETCH_ALL_AUCTIONS, CREATE_NEW_AUCTION, DELETE_AUCTION,FILTERED_AUCTIONS, UPDATE_AUCTION} from '../actions/auctionAction';
+import {
+    FETCH_ALL_AUCTIONS,
+    CREATE_NEW_AUCTION,
+    DELETE_AUCTION,
+    FILTERED_AUCTIONS,
+    FETCH_SINGLE_AUCTION,
+    UPDATE_AUCTION
+    
+} from '../actions/auctionAction';
 
 const initialState = {
     items: [],
+    filter: '',
+    auction: null,
     filteredList: []
 }
 
 export default function auctionReducer(state = initialState, action) {
+
     switch (action.type) {
+        case FETCH_SINGLE_AUCTION:
+            return {
+                ...state,
+                auction: action.payload
+            }
         case FETCH_ALL_AUCTIONS:
             return {
                 ...state,
@@ -17,14 +33,13 @@ export default function auctionReducer(state = initialState, action) {
                 ...state,
                 items: [action.payload, ...state.items]
             }
-        case DELETE_AUCTION: 
-        console.log(action);
+        case DELETE_AUCTION:
             return {
                 ...state,
-                items: state.items.filter(a=>a.AuktionID !== action.AuktionID)
+                items: state.items.filter(a => a.AuktionID !== action.AuktionID)
             }
         case FILTERED_AUCTIONS:
-            return{
+            return {
                 ...state,
                 filteredList: state.items.filter(a => {
                     if(a.Titel.includes(action.payload))
