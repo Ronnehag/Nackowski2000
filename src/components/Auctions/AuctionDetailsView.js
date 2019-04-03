@@ -1,16 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {deleteAuction} from '../../store/actions/auctionAction';
+import { deleteAuction } from '../../store/actions/auctionAction';
 
-export default class AuctionDetailsView extends React.Component {
+class AuctionDetailsView extends React.Component {
     handleClick = () => {
         const id = this.props.item.AuktionID;
         this.props.dispatch(deleteAuction(id));
-        this.props.history.push({pathname: "/"});
+        this.props.history.push({ pathname: "/" });
     }
     validateUser = () => {
-    
+
     }
     render() {
 
@@ -25,20 +25,20 @@ export default class AuctionDetailsView extends React.Component {
             hour: "2-digit",
             minute: "2-digit"
         }
-        
+
         return (
             <div>
                 <h2>Produkt</h2>
                 <div className="card">
                     <div className="card-header">
-                    <div className="row">
-                        <div className="col-6">
-                            <div className="text-left">{this.props.item.Titel}</div>
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="text-left">{this.props.item.Titel}</div>
+                            </div>
+                            <div className="col-6">
+                                <div className="text-right">{date.toLocaleString("sv-SE", dateOptions)}</div>
+                            </div>
                         </div>
-                        <div className="col-6">
-                            <div className="text-right">{date.toLocaleString("sv-SE", dateOptions)}</div>
-                        </div>
-                    </div>
                     </div>
                     <div className="card-body">
                         {this.props.item.Beskrivning}
@@ -48,12 +48,13 @@ export default class AuctionDetailsView extends React.Component {
                             <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Ta bort</button>
                             <Link to={`/Update/${this.props.item.AuktionID}`}>
                                 <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
-                            </Link>  
+                            </Link>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         )
     }
 }
+export default connect()(AuctionDetailsView);
