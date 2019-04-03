@@ -21,7 +21,7 @@ export default class AuctionDetailsBet extends React.Component {
                 <h2>Budgivare</h2>
                 <div className="card">
                     <div className="card-header">
-                        <p>Utropspris: {this.props.item.Utropspris}kr Högsta bud: xxx kr</p>
+                        <p>Utropspris: {this.props.item.Utropspris}kr</p>
                         <div className="input-group">
                             <input className="form-control" type="text" placeholder="Lägg bud" />
                             <button className="btn btn-primary btn-sm">skicka</button>
