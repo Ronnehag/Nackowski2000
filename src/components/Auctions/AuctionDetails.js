@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class AuctionDetails extends React.Component {
 
     render() {
-        const {Bud} = this.props.auctions;
+        const { Bud } = this.props.auctions;
         return (
             <div>
                 <div className="row">
