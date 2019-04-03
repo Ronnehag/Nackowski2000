@@ -46,7 +46,7 @@ export default function auctionReducer(state = initialState, action) {
                 items: state.items.filter(a => a.AuktionID !== action.AuktionID)
             }
         case FILTERED_AUCTIONS:
-            let searchvalue = action.payload.toLowerCase();            
+            let searchvalue = action.payload.toLowerCase();
             return {
                 ...state,
                 filteredList: state.items.filter(a => {
