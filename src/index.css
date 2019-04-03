@@ -114,3 +114,14 @@ img{
   padding-left: 450px;
 }
 
+#noAuctionsText{
+  color: palevioletred;
+  margin-left: 20px;
+}
+
+#noAuctionsText h3{
+  margin-top: 20px;
+}
+
+
+

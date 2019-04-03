@@ -36,8 +36,8 @@ class SearchList extends Component {
         if(filteredList.length === 0)
         {
             return(
-                <div class="row">
-                    <h3>Inga auktioner med angivet sökvärde</h3>
+                <div class="row" id="noAuctionsText">
+                    <h3>Inga auktioner matchar angivet sökvärde</h3>
                 </div>
             )
         }
