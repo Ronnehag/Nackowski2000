@@ -7,7 +7,7 @@ import UpdateAuction from './components/Auctions/UpdateAuction';
 import { connect } from 'react-redux';
 import { fetchAuctions } from './store/actions/auctionAction';
 import NavigationBar from './components/Navbar/NavigationBar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 class App extends Component {
 
@@ -26,7 +26,7 @@ class App extends Component {
               <Route path={`/Auctions/:id`} component={AuctionDetails} />
               <Route path={`/Update/:id`} component={UpdateAuction}/>
               <Route path="/newauction" component={CreateNewAuction} />
-              <Route path="/search" component={SearchList}/>
+              <Route path="/search" component={SearchList} />
             </Switch>
           </div>
         </div>

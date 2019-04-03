@@ -34,7 +34,7 @@ export default class Auction extends React.Component {
                         <img className="card-img-top" src={`https://picsum.photos/200/200/?image=${rand}`} alt="auktionsbild" />
                         <div className="card-body">
                             <h6 className="card-title">{this.props.item.Titel} </h6>
-                            <p className="card-text non-link">{this.props.item.Beskrivning}</p>
+                            <p className="card-text non-link">{this.props.item.Beskrivning.substr(0, 15) + "..."}</p>
                             <div className="row non-link">
                                 <div className="col-6 text-left">
                                     <p id="price"><strong>{this.formatPrice()} kr</strong> {this.countBids()}</p>

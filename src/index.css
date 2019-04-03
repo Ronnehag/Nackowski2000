@@ -38,7 +38,7 @@ code {
   flex-direction: column;
   font-size: calc(6px + 1vmin);
   color: black;
-  max-width: 80%;
+  max-width: 90%;
 }
 .container-fluid{
   padding: 0;
@@ -113,4 +113,15 @@ img{
 #dateDetailView{
   padding-left: 450px;
 }
+
+#noAuctionsText{
+  color: palevioletred;
+  margin-left: 20px;
+}
+
+#noAuctionsText h3{
+  margin-top: 20px;
+}
+
+
 

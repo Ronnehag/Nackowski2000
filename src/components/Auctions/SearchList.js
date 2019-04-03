@@ -33,11 +33,23 @@ class SearchList extends Component {
                 </div>
             )
 
-        return (
-            <div className="row">
-                {auctionList}
-            </div>
-        )
+        if(filteredList.length === 0)
+        {
+            return(
+                <div class="row" id="noAuctionsText">
+                    <h3>Inga auktioner matchar angivet sökvärde</h3>
+                </div>
+            )
+        }
+        else
+        {
+            return (
+                <div className="row">
+                    {auctionList}
+                </div>
+            )
+        }
+        
     }
 }
 const mapStateToProps = state => {
