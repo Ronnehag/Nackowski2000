@@ -73,7 +73,6 @@ export function searchAuction(searchValue) {
 }
 
 export function fetchSingleAuction(id) {
-    console.log(id);
     return async dispatch => {
         try {
             const res = await fetch(auctionURL + id);
