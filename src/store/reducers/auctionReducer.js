@@ -1,4 +1,4 @@
-import { FETCH_ALL_AUCTIONS, CREATE_NEW_AUCTION, DELETE_AUCTION,FILTERED_AUCTIONS} from '../actions/auctionAction';
+import { FETCH_ALL_AUCTIONS, CREATE_NEW_AUCTION, DELETE_AUCTION,FILTERED_AUCTIONS, UPDATE_AUCTION} from '../actions/auctionAction';
 
 const initialState = {
     items: [],
@@ -27,6 +27,10 @@ export default function auctionReducer(state = initialState, action) {
             return{
                 ...state,
                 filter: action.payload
+            }
+        case UPDATE_AUCTION:
+            return{
+                ...state
             }
 
         default: return state;

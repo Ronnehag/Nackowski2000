@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import {deleteAuction} from '../../store/actions/auctionAction';
 class AuctionDetailsView extends React.Component {
     handleClick = () => {
@@ -44,7 +45,9 @@ class AuctionDetailsView extends React.Component {
                     <div className="card-footer">
                         <div className="btn-group" role="group">
                             <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Ta bort</button>
-                            <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
+                            <Link to={`/Update/${this.props.item.AuktionID}`}>
+                                <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
+                            </Link>  
                         </div>
                         
                     </div>

@@ -4,6 +4,7 @@ export const DELETE_AUCTION = "DELETE_AUCTION";
 export const FILTERED_AUCTIONS = "FILTERED_AUCTIONS"
 export const FETCH_BETS = "FETCH_BETS";
 export const PLACE_BET = "PLACE_BET";
+export const UPDATE_AUCTION = "UPDATE_AUCTION";
 
 
 const auctionURL = "http://nackowskis.azurewebsites.net/api/Auktion/2000/";
@@ -61,6 +62,19 @@ export function deleteAuction(id) {
             console.log(err);
         }
 
+    }
+}
+export function updateAuction(id) {
+    return async dispatch => {
+        try{
+            const res = await fetch(auctionURL + id, {
+                method: 'PUT'
+            });
+            dispatch({type: UPDATE_AUCTION, AuktionID: id});
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 }
 export function searchAuction(searchValue) {
