@@ -21,7 +21,7 @@ class SearchForm extends Component {
     }
 
     render() {
-        return (<div>
+        return (<div className="ml-2">
             <form onSubmit={this.handleSubmit} className="form-inline">
                 <div className="input-group">
                     <input type="text" onChange={this.handleChange} name="searchText" id="searchText" className="form-control-sm" placeholder="Sök auktioner" />

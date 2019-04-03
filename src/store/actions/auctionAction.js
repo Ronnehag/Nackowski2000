@@ -14,13 +14,14 @@ export function fetchAuctions() {
         try {
             const res = await fetch(auctionURL);
             const auctions = await res.json();
-            auctions.forEach(async (obj) => {
-                const res = await fetch(bidURL + obj["AuktionID"]);
+            for (const item of auctions) {
+                const { AuktionID } = item;
+                const res = await fetch(bidURL + AuktionID);
                 const bids = await res.json();
-                if (bids.length) {
-                    obj.Bud = bids;
+                if (bids) {
+                    item["Bud"] = bids;
                 }
-            });
+            }
             dispatch({ type: FETCH_ALL_AUCTIONS, payload: auctions });
         } catch (err) {
             console.log(err);

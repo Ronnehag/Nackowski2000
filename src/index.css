@@ -14,6 +14,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.mt-10{
+  margin-top: 10em;
+}
+.non-link{
+  color:black;
+}
+.non-link a:hover{
+  text-decoration: none;
+  color: black;
+}
+.card:hover h6{
+  color: #146ED0;
+}
+.card h6:hover{
+  color: #146ED0;
+  text-decoration: underline;
+}
 
 .container {
   background-color: wheat;
@@ -21,7 +38,7 @@ code {
   flex-direction: column;
   font-size: calc(6px + 1vmin);
   color: black;
-  max-width: 90%;
+  max-width: 80%;
 }
 .container-fluid{
   padding: 0;
@@ -84,12 +101,7 @@ img{
 
 
 /*CREATE AUCTION*/
-.createAuctionContainer{
-  padding-top: 10px;
-  padding-left: 20%;
-}
 .createAuctionForm{
-  min-width: 80%;
   background-color: pink;
   border: 2px solid palevioletred;
   border-radius: 2%;

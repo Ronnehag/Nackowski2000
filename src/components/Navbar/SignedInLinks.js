@@ -15,7 +15,7 @@ export class SignedInLinks extends Component {
             <div>
                 <div className="form-inline">
                     <div className="input-group">
-                        <span className="navbar-text">{username}</span>
+                        <span className="navbar-text text-white mr-2"><strong>{username}</strong></span>
                     </div>
                     <div className="input-group">
                         <Link to="/newauction" className="nav-link">Ny auktion</Link>
