@@ -47,26 +47,28 @@ class CreateNewAuction extends Component {
 
         return (
             <div className="createAuctionContainer">
-                <div className="col-6 createAuctionForm">
-                    <h1>Skapa ny auktion</h1>
+                <div className="col-12 col-sm-12 col-md-8 offset-md-2 offset-lg-2 col-lg-8 createAuctionForm">
+                    <h1 className="text-center">Skapa ny auktion</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="titel">Titel</label>
-                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className="form-control" required/>
+                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className="form-control" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="beskrivning">Beskrivning</label>
                             <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" id="beskrivning" rows="5" required ></textarea>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="slutdatum" className="col-2 col-form-label">Slutdatum</label>
+                            <label htmlFor="slutdatum" className="col-form-label">Slutdatum</label>
                             <input onChange={this.handleChange} className="form-control" name="SlutDatum" id="slutdatum" type="datetime-local" value={this.state.SlutDatum} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="utropspris">Utropspris</label>
                             <input type="number" onChange={this.handleChange} name="Utropspris" id="utropspris" className="form-control" />
                         </div>
-                        <button type="submit" className="btn btn-primary">Spara</button>
+                        <div className="form-group">
+                            <button type="submit" className="btn-sm btn-custom">Skapa</button>
+                        </div>
                     </form>
                 </div>
             </div>);
