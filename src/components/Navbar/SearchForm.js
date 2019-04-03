@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { searchAuction } from '../../store/actions/auctionAction';
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class SearchForm extends React.Component {
 
@@ -20,16 +20,10 @@ class SearchForm extends React.Component {
         event.preventDefault();
         this.props.dispatch(searchAuction(this.state.searchText))
         this.setState({ redirect: true });
+        this.props.history.push("/search");
     }
 
     render() {
-
-        const { redirect } = this.state;
-
-        if (redirect) {
-            return (<Redirect to="/search" />)
-        }
-
         return (<div className="ml-2">
             <form onSubmit={this.handleSubmit} className="form-inline">
                 <div className="input-group">
@@ -43,4 +37,4 @@ class SearchForm extends React.Component {
     }
 }
 
-export default connect()(SearchForm);
+export default withRouter(connect()(SearchForm));
