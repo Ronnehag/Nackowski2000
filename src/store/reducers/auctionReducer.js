@@ -48,7 +48,9 @@ export default function auctionReducer(state = initialState, action) {
             }
         case UPDATE_AUCTION:
             return{
-                ...state
+                ...state,
+                items: [action.payload, ...state.items]
+
             }
 
         default: return state;

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import {deleteAuction} from '../../store/actions/auctionAction';
-class AuctionDetailsView extends React.Component {
+export default class AuctionDetailsView extends React.Component {
     handleClick = () => {
         const id = this.props.item.AuktionID;
         this.props.dispatch(deleteAuction(id));
@@ -56,4 +56,3 @@ class AuctionDetailsView extends React.Component {
         )
     }
 }
-export default connect()(AuctionDetailsView)
