@@ -1,6 +1,7 @@
 export const FETCH_ALL_AUCTIONS = "FETCH_ALL_AUCTIONS";
 export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
 export const DELETE_AUCTION = "DELETE_AUCTION";
+export const FETCH_SINGLE_AUCTION = "FETCH_SINGLE_AUCTION";
 export const FILTERED_AUCTIONS = "FILTERED_AUCTIONS"
 export const FETCH_BETS = "FETCH_BETS";
 export const PLACE_BET = "PLACE_BET";
@@ -69,5 +70,22 @@ export function searchAuction(searchValue) {
         dispatch({ type: FILTERED_AUCTIONS, payload: searchValue });
 
     }
+}
 
+export function fetchSingleAuction(id) {
+    console.log(id);
+    return async dispatch => {
+        try {
+            const res = await fetch(auctionURL + id);
+            const auction = await res.json();
+            const res2 = await fetch(bidURL + id);
+            const bids = await res2.json();
+            if (bids) {
+                auction.Bud = bids;
+            }
+            dispatch({ type: FETCH_SINGLE_AUCTION, payload: auction });
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
