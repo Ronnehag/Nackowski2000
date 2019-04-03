@@ -11,7 +11,6 @@ import {
 
 const initialState = {
     items: [],
-    filter: '',
     auction: null,
     filteredList: []
 }
@@ -47,10 +46,12 @@ export default function auctionReducer(state = initialState, action) {
                 items: state.items.filter(a => a.AuktionID !== action.AuktionID)
             }
         case FILTERED_AUCTIONS:
+            let searchvalue = action.payload.toLowerCase();            
             return {
                 ...state,
                 filteredList: state.items.filter(a => {
-                    if (a.Titel.includes(action.payload))
+                    let titelLower = a.Titel.toLowerCase();
+                    if (titelLower.includes(searchvalue))
                         return a;
                 })
             }

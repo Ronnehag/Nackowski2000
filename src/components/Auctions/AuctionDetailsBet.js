@@ -39,7 +39,7 @@ class AuctionDetailsBet extends React.Component {
                 <h2>Budgivare</h2>
                 <div className="card">
                     <div className="card-header">
-                        <p>Utropspris: {this.props.item.Utropspris}kr Högsta bud: xxx kr</p>
+                        <p>Utropspris: {this.props.item.Utropspris}kr</p>
                         <div className="input-group">
                             <input className="form-control" onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud" />
                             <button onClick={this.handleClick} className="btn btn-primary btn-sm">skicka</button>
