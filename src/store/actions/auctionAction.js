@@ -3,7 +3,6 @@ export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
 export const DELETE_AUCTION = "DELETE_AUCTION";
 export const FETCH_SINGLE_AUCTION = "FETCH_SINGLE_AUCTION";
 export const FILTERED_AUCTIONS = "FILTERED_AUCTIONS"
-export const FETCH_BETS = "FETCH_BETS";
 export const PLACE_BET = "PLACE_BET";
 export const UPDATE_AUCTION = "UPDATE_AUCTION";
 
@@ -105,6 +104,31 @@ export function fetchSingleAuction(id) {
             }
             console.log("fetchsingle", auction);
             dispatch({ type: FETCH_SINGLE_AUCTION, payload: auction });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+
+export function placeBet(id, amount) {
+    console.log(id, amount);
+    return async dispatch => {
+        try {
+            const bid = {
+                AuktionID: id,
+                Budgivare: sessionStorage.getItem("user"),
+                Summa: parseInt(amount)
+            };
+            const res = await fetch(bidURL + id, {
+                method: "POST",
+                body: JSON.stringify(bid),
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+            });
+            dispatch({ type: PLACE_BET, payload: bid });
         } catch (err) {
             console.log(err);
         }

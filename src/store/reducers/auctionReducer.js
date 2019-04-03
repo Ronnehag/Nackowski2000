@@ -4,7 +4,8 @@ import {
     DELETE_AUCTION,
     FILTERED_AUCTIONS,
     FETCH_SINGLE_AUCTION,
-    UPDATE_AUCTION
+    UPDATE_AUCTION,
+    PLACE_BET
 
 } from '../actions/auctionAction';
 
@@ -18,6 +19,13 @@ const initialState = {
 export default function auctionReducer(state = initialState, action) {
 
     switch (action.type) {
+        case PLACE_BET:
+            return {
+                ...state,
+                auction: { ...state.auction, Bud: [...state.auction.Bud, action.payload] }
+            }
+
+
         case FETCH_SINGLE_AUCTION:
             return {
                 ...state,
