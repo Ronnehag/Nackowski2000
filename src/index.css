@@ -22,12 +22,13 @@ code {
 }
 .non-link a:hover{
   text-decoration: none;
-  color: black;
-}
-.card:hover h6{
   color: #146ED0;
 }
-.card h6:hover{
+#auction-card.card:hover h6{
+  color: #146ED0;
+  text-decoration: underline;
+}
+#auction-card h6:hover{
   color: #146ED0;
   text-decoration: underline;
 }

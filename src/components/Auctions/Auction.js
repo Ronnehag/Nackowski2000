@@ -28,7 +28,7 @@ export default class Auction extends React.Component {
 
         let rand = Math.floor(Math.random() * 200);
         return (
-            <div className="col-lg-3 cardSizing non-link">
+            <div className="col-lg-3 cardSizing non-link" id="auction-card">
                 <Link to={`/Auctions/${this.props.item.AuktionID}`}>
                     <div className="card">
                         <img className="card-img-top" src={`https://picsum.photos/200/200/?image=${rand}`} alt="auktionsbild" />
