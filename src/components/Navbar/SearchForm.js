@@ -18,19 +18,18 @@ class SearchForm extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.dispatch(searchAuction(this.state.searchText)
-        )
+        this.props.dispatch(searchAuction(this.state.searchText))
         this.setState({ redirect: true });
     }
 
     render() {
 
-        const { redirect } = this.state.redirect;
+        const { redirect } = this.state;
 
         if (redirect) {
-            return <Redirect to="/search" />;
+            return (<Redirect to="/search" />)
         }
-        
+
         return (<div className="ml-2">
             <form onSubmit={this.handleSubmit} className="form-inline">
                 <div className="input-group">
