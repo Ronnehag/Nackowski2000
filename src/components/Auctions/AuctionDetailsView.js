@@ -15,7 +15,8 @@ class AuctionDetailsView extends React.Component {
 
     }
     render() {
-       
+        const user = sessionStorage.getItem("user");
+
         return (
             <div>
                 <h2>Produkt</h2>
