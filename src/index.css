@@ -132,5 +132,10 @@ img{
   font-weight: bold;
 }
 
+.error{
+  border: 1px solid red;
+  background-color: rgb(253, 232, 199);
+}
+
 
 
