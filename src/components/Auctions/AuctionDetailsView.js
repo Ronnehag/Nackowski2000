@@ -18,13 +18,12 @@ class AuctionDetailsView extends React.Component {
         const user = sessionStorage.getItem("user");
 
         return (
-            <div>
-                <h2>Produkt</h2>
+            <div className="mt-5">
                 <div className="card">
                     <div className="card-header">
                         <div className="row">
                             <div className="col-6">
-                                    {console.log(this.props.item)}
+                                {console.log(this.props.item)}
                                 <div className="text-left">{this.props.item.Titel}</div>
                             </div>
                             <div className="col-6">
@@ -36,21 +35,27 @@ class AuctionDetailsView extends React.Component {
                         {this.props.item.Beskrivning}
                     </div>
                     <div className="card-footer">
-                    {user === this.props.item.SkapadAv ?  <div className="btn-group" role="group">
-                            <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Ta bort</button>
-                            <Link to={`/Update/${this.props.item.AuktionID}`}>
-                                <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
-                            </Link>
-                        </div> : <p>Skapad av: {this.props.item.SkapadAv}</p> 
-                        
-                     }
-                    
+                        {user === this.props.item.SkapadAv ?
+                            <div>
+                                <button type="button" className="btn btn-danger" onClick={this.handleClick}>Ta bort</button>
+                                <Link to={`/Update/${this.props.item.AuktionID}`}>
+                                    <button type="button" className="btn btn-info ml-1">Uppdatera</button>
+                                </Link>
+                            </div> : <p>Skapad av: {this.props.item.SkapadAv}</p>
+
+                        }
+
+                    </div>
+                </div>
+                <div className="row mt-5">
+                    <div className="col-12 text-center">
+                        <img className="img-fluid" src="https://picsum.photos/500/300/?random" alt="auktionsbild" />
                     </div>
                 </div>
             </div>
         )
     }
-   
+
 }
 const mapStateToProps = (state) => {
     return {
