@@ -35,11 +35,6 @@ export default function auctionReducer(state = initialState, action) {
                 ...state,
                 items: action.payload
             }
-        case CREATE_NEW_AUCTION:
-            return {
-                ...state,
-                items: [action.payload, ...state.items]
-            }
         case DELETE_AUCTION:
             return {
                 ...state,
@@ -62,7 +57,9 @@ export default function auctionReducer(state = initialState, action) {
                 items: values
             }
 
-        default: return state;
+        case CREATE_NEW_AUCTION:
+        default:
+            return state;
     }
 }
 

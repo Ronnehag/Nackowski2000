@@ -10,12 +10,12 @@ export class SignedInLinks extends Component {
     }
 
     render() {
-        const { username } = this.props;
+        const user = sessionStorage.getItem("user");
         return (
             <div>
                 <div className="form-inline">
                     <div className="input-group">
-                        <span className="navbar-text text-white mr-2"><strong>{username}</strong></span>
+                        <span className="navbar-text text-white mr-2"><strong>{user}</strong></span>
                     </div>
                     <div className="input-group">
                         <Link to="/newauction" className="nav-link">Ny auktion</Link>

@@ -16,6 +16,7 @@ export class LoginForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        if (this.state.username === "") return;
         this.props.dispatch(loginUser(this.state.username));
     }
 

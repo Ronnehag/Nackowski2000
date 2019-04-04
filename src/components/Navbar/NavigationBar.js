@@ -7,6 +7,7 @@ import SignedInLinks from './SignedInLinks';
 
 class NavigationBar extends Component {
     render() {
+        const user = sessionStorage.getItem("user");
         const { username, isLoggedIn } = this.props.user;
         return (
             <div>
@@ -23,7 +24,7 @@ class NavigationBar extends Component {
                         </ul>
                         <SearchForm />
                         <div className="ml-auto">
-                            {isLoggedIn ? <SignedInLinks username={username} /> : <LoginForm />}
+                            {isLoggedIn || user ? <SignedInLinks /> : <LoginForm />}
                         </div>
                     </div>
                 </nav>

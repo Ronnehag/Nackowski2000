@@ -33,7 +33,7 @@ export function fetchAuctions() {
 export function createAuction(auction) {
     return async dispatch => {
         try {
-            const res = await fetch(auctionURL, {
+            await fetch(auctionURL, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json, text/plain, */*',
@@ -41,9 +41,7 @@ export function createAuction(auction) {
                 },
                 body: JSON.stringify(auction)
             });
-            const json = await res.json();
-            console.log(json);
-            dispatch({ type: CREATE_NEW_AUCTION, payload: json });
+            dispatch({ type: CREATE_NEW_AUCTION, payload: auction });
         } catch (err) {
             console.log(err);
         }
