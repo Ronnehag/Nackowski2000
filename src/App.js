@@ -5,9 +5,18 @@ import SearchList from './components/Auctions/SearchList'
 import Home from './components/Main/Home';
 import UpdateAuction from './components/Auctions/UpdateAuction';
 import NavigationBar from './components/Navbar/NavigationBar';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginUser } from './store/actions/authAction';
 
 class App extends Component {
+
+  componentDidMount() {
+    let user = sessionStorage.getItem("user");
+    if (user) {
+      this.props.dispatch(loginUser(user));
+    }
+  }
 
   render() {
     return (
@@ -28,4 +37,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default connect()(App);
