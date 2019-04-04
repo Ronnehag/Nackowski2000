@@ -85,9 +85,7 @@ class CreateNewAuction extends Component {
     }
 
     render() {
-
         const endDate = moment(this.state.SlutDatum).format("YYYY-MM-DD");
-        const endTime = moment(this.state.SlutDatum).format("HH:mm");
 
         const {errors} = this.state;
 
@@ -111,7 +109,7 @@ class CreateNewAuction extends Component {
                             <input type="number" onChange={this.handleChange} name="Utropspris" id="utropspris" className="form-control" />
                         </div>
                         <div>
-                            <h6>Din auktion kommer att avslutas den {endDate} kl {endTime}</h6>
+                            <p>Din auktion kommer att vara giltig i 10 dagar fr.o.m. att den skapas.</p>
                         </div>
                         <div className="form-group">
                             <button type="submit" className="btn-sm btn-custom">Skapa</button>
