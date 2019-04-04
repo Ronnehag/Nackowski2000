@@ -6,14 +6,40 @@ import { getRemainingTime } from '../../Helpers/DateFunctions';
 class AuctionDetailsBet extends React.Component {
 
     state = {
-        amount: 0
+        amount: 0,
+        error: {
+            Titel: "",
+            Beskrivning: "",
+            Utropspris: ""
+        }
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
-    }
+        const {amount} = this.state;
+        let error = this.state.error;
+        switch (e.target.name)
+        {
+            case amount: 
+                if(e.target.value < this.props.item.Utropspris)
+                {
+                    error.Titel = "Budet måste vara högre än utropspriset"
+                }
+                else if(e.target.value < this.props.bids.Summa )
+                {
+                    error.Titel ="Budet måste vara högre än tidigare bud"
+                }
+                break;
+                default: 
+                    break;
+        };
+        this.setState({ error, [e.target.name]: e.target.value });
+        console.log(this.state.error);
+      
+    }            
+
 
     handleClick = (e) => {
         e.preventDefault();
@@ -32,7 +58,10 @@ class AuctionDetailsBet extends React.Component {
             }))
         ) : (<span>Finns inga bud</span>);
     }
+    
     render() {
+        const {error} = this.state;
+
         let date3 = getRemainingTime(this.props.item.SlutDatum);
         const user = sessionStorage.getItem("user");
 
@@ -51,7 +80,11 @@ class AuctionDetailsBet extends React.Component {
                         </div>
                         {user !== null ?  
                         <div className="input-group">
-                            <input className="form-control" onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud" />
+                            <input onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud"
+                            className={error.Titel.length > 0 ? "form-control error" : "form-control"} required
+                             />
+                             {error.Titel.length > 0 && (<span className="errorMessage">{error.Titel}</span>)}
+
                             <button onClick={this.handleClick} className="btn btn-primary btn-sm">Lägg bud</button>
                         </div> :<p></p> }
                     </div>
