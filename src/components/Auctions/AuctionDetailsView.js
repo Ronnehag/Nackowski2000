@@ -9,10 +9,20 @@ class AuctionDetailsView extends React.Component {
         this.props.dispatch(deleteAuction(id));
         this.props.history.push({ pathname: "/" });
     }
+
     validateUser = () => {
+     
+           
+            
+           
+            
+        
+            
+            
 
     }
     render() {
+        const user = sessionStorage.getItem("user");
 
         var date = new Date(this.props.item.StartDatum.replace('T', ' '));
         const dateOptions = {
@@ -33,6 +43,7 @@ class AuctionDetailsView extends React.Component {
                     <div className="card-header">
                         <div className="row">
                             <div className="col-6">
+{console.log(this.props.item)}
                                 <div className="text-left">{this.props.item.Titel}</div>
                             </div>
                             <div className="col-6">
@@ -44,12 +55,17 @@ class AuctionDetailsView extends React.Component {
                         {this.props.item.Beskrivning}
                     </div>
                     <div className="card-footer">
-                        <div className="btn-group" role="group">
+                    {user !== null ?  <div className="btn-group" role="group">
                             <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Ta bort</button>
                             <Link to={`/Update/${this.props.item.AuktionID}`}>
                                 <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
                             </Link>
-                        </div>
+                        </div> : <p>blabla</p> 
+                        
+                    
+                     }
+                    
+                 
 
                     </div>
                 </div>
