@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <Router>
         <NavigationBar />
-        <div className="container pt-3">
+        <div className="container">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path={`/Auctions/:id`} component={AuctionDetails} />
