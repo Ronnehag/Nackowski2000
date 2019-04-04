@@ -12,34 +12,10 @@ class AuctionDetailsView extends React.Component {
     }
 
     validateUser = () => {
-     
-           
-            
-           
-            
-        
-            
-            
 
     }
     render() {
-<<<<<<< HEAD
-        const user = sessionStorage.getItem("user");
-
-        var date = new Date(this.props.item.StartDatum.replace('T', ' '));
-        const dateOptions = {
-            hour12: false,
-            timeZone: "UTC",
-            //year: "numeric",
-            day: "numeric",
-            month: "numeric",
-            weekday: "short",
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-
-=======
->>>>>>> 96fae9c70b6761f7e947fc17b45277dddb6a7bef
+       
         return (
             <div>
                 <h2>Produkt</h2>
