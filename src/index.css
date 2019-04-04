@@ -107,6 +107,9 @@ img{
   border: 2px solid palevioletred;
   border-radius: 2%;
 }
+.createAuctionContainer{
+  padding-top: 2%;
+}
 /*END CREATE AUCTION*/
 
 
