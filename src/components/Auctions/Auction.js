@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getRemainingTime } from '../../Helpers/DateFunctions';
+import { red } from 'ansi-colors';
 export default class Auction extends React.Component {
 
     formatPrice = () => {
@@ -15,6 +16,7 @@ export default class Auction extends React.Component {
     }
 
     render() {
+        let timeLeft = getRemainingTime(this.props.item.SlutDatum);
 
         let rand = (Math.floor(Math.random() * 50) + 1);
         return (
@@ -30,7 +32,7 @@ export default class Auction extends React.Component {
                                     <p id="price"><strong>{this.formatPrice()} kr</strong> {this.countBids()}</p>
                                 </div>
                                 <div className="col-6 text-right">
-                                    <p id="date-tag">{getRemainingTime(this.props.item.SlutDatum)}</p>
+                                    <p id="date-tag" style={timeLeft.includes("minuter") ? closing : null}>{timeLeft}</p>
                                 </div>
                             </div>
                         </div>
@@ -39,4 +41,8 @@ export default class Auction extends React.Component {
             </div>
         );
     }
+}
+
+const closing = {
+    color: "red"
 }
