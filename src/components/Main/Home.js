@@ -7,7 +7,7 @@ class Home extends React.Component {
     componentDidMount() {
         setTimeout(() => {
             this.props.dispatch(fetchAuctions());
-        }, 1000);
+        }, 500);
     }
 
 

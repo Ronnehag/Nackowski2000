@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Auction from './Auction';
+import moment from 'moment';
 
 class SearchList extends Component {
 
     sortedList = () => {
-        if (this.props.filteredList.length) {
-            return this.props.filteredList.sort((a, b) => {
+        if (this.props.auctions.length) {
+            return this.props.auctions.sort((a, b) => {
                 if (a.SlutDatum === b.SlutDatum) return 0;
                 return a.SlutDatum > b.SlutDatum ? 1 : -1;
             })
         }
-        else{
+        else {
             return [];
         }
-    }  
+    }
 
     render() {
 
-        let filteredList = this.sortedList();        
+        let filteredList = this.sortedList();
 
         const auctionList = filteredList.length > 0 ? filteredList.map((auction) => {
-            console.log(auction.Bud);
+            let valid = auction.SlutDatum > moment().format();
             return (
-                <Auction item={auction} key={auction.AuktionID} />
+                <Auction item={auction} key={auction.AuktionID} valid={valid} />
             )
         }) : (
                 <div className="col-6 offset-6 mt-5 mt-10">
@@ -33,28 +34,26 @@ class SearchList extends Component {
                 </div>
             )
 
-        if(filteredList.length === 0)
-        {
-            return(
+        if (filteredList.length === 0) {
+            return (
                 <div class="row" id="noAuctionsText">
                     <h3>Inga auktioner matchar angivet sökvärde</h3>
                 </div>
             )
         }
-        else
-        {
+        else {
             return (
                 <div className="row">
                     {auctionList}
                 </div>
             )
         }
-        
+
     }
 }
 const mapStateToProps = state => {
     return {
-        filteredList: state.auctions.filteredList
+        auctions: state.auctions.filteredList
     }
 }
 export default connect(mapStateToProps)(SearchList);

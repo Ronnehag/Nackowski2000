@@ -23,8 +23,9 @@ class AuctionList extends React.Component {
         const filteredList = this.filteredList();
 
         const auctionList = filteredList.length > 0 ? filteredList.map((auction) => {
+            let valid = auction.SlutDatum > moment().format();
             return (
-                <Auction item={auction} key={auction.AuktionID} />
+                <Auction item={auction} key={auction.AuktionID} valid={valid} />
             )
         }) : (
                 <div className="col-6 offset-6 mt-5 mt-10">
