@@ -127,5 +127,10 @@ img{
   margin-top: 20px;
 }
 
+.errorMessage{
+  color: red;
+  font-weight: bold;
+}
+
 
 
