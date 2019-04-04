@@ -23,9 +23,13 @@ class UpdateAuction extends Component {
     validateInput = (name) => {
         switch (name) {
             case "Titel":
-                if (this.state.Titel.length > 5) {
+                if (this.state.Titel.length < 5) {
                     this.setState(prevState => ({
                         error: { ...prevState.error, Title: "Test" }
+                    }));
+                } else {
+                    this.setState(prevState => ({
+                        error: { ...prevState.error, Title: "" }
                     }));
                 }
 
@@ -39,9 +43,10 @@ class UpdateAuction extends Component {
     }
 
     handleChange = (event) => {
+        let name = event.target.name;
         this.setState({
             [event.target.name]: event.target.value
-        }, () => this.validateInput(event.target.name));
+        }, () => this.validateInput(name));
     }
 
     handleSubmit = (event) => {
@@ -55,17 +60,19 @@ class UpdateAuction extends Component {
     componentDidMount() {
         const { match } = this.props;
         this.props.dispatch(fetchSingleAuction(match.params.id));
+        if (this.props.auction) {
+            this.setState({
+                AuktionID: parseInt(this.props.auction.AuktionID),
+                Titel: this.props.auction.Titel,
+                Beskrivning: this.props.auction.Beskrivning,
+                StartDatum: this.props.auction.StartDatum,
+                SlutDatum: this.props.auction.SlutDatum,
+                SkapadAv: sessionStorage.getItem("user"),
+                Utropspris: parseInt(this.props.auction.Utropspris),
+                Bud: this.props.auction.Bud
+            });
+        }
 
-        this.setState({
-            AuktionID: parseInt(this.props.auction.AuktionID),
-            Titel: this.props.auction.Titel,
-            Beskrivning: this.props.auction.Beskrivning,
-            StartDatum: this.props.auction.StartDatum,
-            SlutDatum: this.props.auction.SlutDatum,
-            SkapadAv: sessionStorage.getItem("user"),
-            Utropspris: parseInt(this.props.auction.Utropspris),
-            Bud: this.props.auction.Bud
-        });
     }
 
     render() {
@@ -99,7 +106,7 @@ class UpdateAuction extends Component {
                             </div>
                         </form>
                         <br />
-                        {this.state.Error.Title ? this.state.Error.Title : null}
+                        {this.state.error.Title ? this.state.error.Title : null}
                     </div>
                 </div>
             )
