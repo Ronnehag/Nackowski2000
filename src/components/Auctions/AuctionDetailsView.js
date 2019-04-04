@@ -41,7 +41,7 @@ class AuctionDetailsView extends React.Component {
                             <Link to={`/Update/${this.props.item.AuktionID}`}>
                                 <button type="button" className="btn btn-primary btn-md">Uppdatera</button>
                             </Link>
-                        </div> : <p></p> 
+                        </div> : <p>Skapad av: {this.props.item.SkapadAv}</p> 
                         
                      }
                     
