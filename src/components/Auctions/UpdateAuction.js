@@ -13,13 +13,35 @@ class UpdateAuction extends Component {
         SlutDatum: "",
         Gruppkod: 2000,
         Utropspris: 0,
-        Bud: []
+        Bud: [],
+        error: {
+            Titel: "",
+            Beskrivning: ""
+        }
     };
+
+    validateInput = (name) => {
+        switch (name) {
+            case "Titel":
+                if (this.state.Titel.length > 5) {
+                    this.setState(prevState => ({
+                        error: { ...prevState.error, Title: "Test" }
+                    }));
+                }
+
+                break;
+            case "Beskrivning":
+
+                break;
+            default:
+                return null;
+        }
+    }
 
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
-        });
+        }, () => this.validateInput(event.target.name));
     }
 
     handleSubmit = (event) => {
@@ -76,6 +98,8 @@ class UpdateAuction extends Component {
                                 <button type="submit" className="btn-sm btn-custom">Uppdatera</button>
                             </div>
                         </form>
+                        <br />
+                        {this.state.Error.Title ? this.state.Error.Title : null}
                     </div>
                 </div>
             )
