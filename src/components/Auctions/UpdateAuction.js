@@ -16,26 +16,54 @@ class UpdateAuction extends Component {
         Bud: [],
         error: {
             Titel: "",
-            Beskrivning: ""
+            Beskrivning: "",
+            Utropspris: ""
         }
     };
 
     validateInput = (name) => {
+        const { Titel, Beskrivning, Utropspris } = this.state;
         switch (name) {
             case "Titel":
-                if (this.state.Titel.length < 5) {
+                if (Titel.length < 5) {
                     this.setState(prevState => ({
-                        error: { ...prevState.error, Title: "Test" }
+                        error: { ...prevState.error, [name]: `${name} måste vara längre än 5 bokstäver` }
+                    }));
+                }
+                else if (Titel.length > 50) {
+                    this.setState(prevState => ({
+                        error: { ...prevState.error, [name]: `${name} får inte överstiga 50 bokstäver` }
                     }));
                 } else {
                     this.setState(prevState => ({
-                        error: { ...prevState.error, Title: "" }
+                        error: { ...prevState.error, [name]: "" }
                     }));
                 }
-
                 break;
             case "Beskrivning":
+                if (Beskrivning.length < 5) {
+                    this.setState(prevState => ({
+                        error: { ...prevState.error, [name]: `${name} måste vara längre än 5 bokstäver` }
+                    }));
+                } else {
+                    this.setState(prevState => ({
+                        error: { ...prevState.error, [name]: "" }
+                    }));
+                }
+                break;
 
+            case "Utropspris":
+                {
+                    if (Utropspris == 0) {
+                        this.setState(prevState => ({
+                            error: { ...prevState.error, [name]: `${name} får inte vara 0 kr` }
+                        }));
+                    } else {
+                        this.setState(prevState => ({
+                            error: { ...prevState.error, [name]: "" }
+                        }));
+                    }
+                }
                 break;
             default:
                 return null;
@@ -45,22 +73,22 @@ class UpdateAuction extends Component {
     handleChange = (event) => {
         let name = event.target.name;
         this.setState({
-            [event.target.name]: event.target.value
+            [name]: event.target.value
         }, () => this.validateInput(name));
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        //TODO: Validering så man inte kan submitta en tom form
+        const { error } = this.state;
+        for (const key in this.state) {
+            this.validateInput(key);
+        }
+        if (error.Titel || error.Beskrivning || error.Utropspris) return;
         this.props.dispatch(updateAuction(this.state))
         this.props.history.push({ pathname: "/" });
-
     }
-
-    componentDidMount() {
-        const { match } = this.props;
-        this.props.dispatch(fetchSingleAuction(match.params.id));
-        if (this.props.auction) {
+    componentDidUpdate(prevProps) {
+        if (this.props.auction !== prevProps.auction) {
             this.setState({
                 AuktionID: parseInt(this.props.auction.AuktionID),
                 Titel: this.props.auction.Titel,
@@ -72,50 +100,59 @@ class UpdateAuction extends Component {
                 Bud: this.props.auction.Bud
             });
         }
+    }
+
+    componentDidMount() {
+        const { match } = this.props;
+        this.props.dispatch(fetchSingleAuction(match.params.id));
+
 
     }
 
     render() {
-
         if (this.props.auction) {
-            const { Titel, Beskrivning, SlutDatum, StartDatum, Utropspris } = this.props.auction;
-            console.log(this.state);
+            const { Titel, Beskrivning, Utropspris } = this.props.auction;
+            const { error } = this.state;
             return (
-                <div className="createAuctionContainer">
+                <div className="row">
                     <div className="col-12 col-sm-12 col-md-8 offset-md-2 offset-lg-2 col-lg-8 createAuctionForm">
                         <h1 className="text-center">Uppdatera auktion</h1>
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="titel">Titel</label>
-                                <input type="text" onChange={this.handleChange} name="Titel" defaultValue={Titel} id="Titel" className="form-control" required />
+                                <input type="text" onChange={this.handleChange} style={error.Titel ? inputError : null} name="Titel" defaultValue={Titel} id="Titel" className="form-control" required autoComplete="off" />
+                                {error.Titel && (<small>{error.Titel}</small>)}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="beskrivning">Beskrivning</label>
-                                <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" defaultValue={Beskrivning} id={this.props.auction.Beskrivning} rows="5" required ></textarea>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="slutdatum" className="col-form-label">Slutdatum</label>
-                                <input onChange={this.handleChange} className="form-control" defaultValue={SlutDatum} name="SlutDatum" id={this.props.auction.SlutDatum} type="datetime-local" />
+                                <textarea onChange={this.handleChange} style={error.Beskrivning ? inputError : null} className="form-control" name="Beskrivning" defaultValue={Beskrivning} id={this.props.auction.Beskrivning} rows="5" required ></textarea>
+                                {error.Beskrivning && (<small>{error.Beskrivning}</small>)}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="utropspris">Utropspris</label>
-                                <input type="number" onChange={this.handleChange} defaultValue={Utropspris} name="Utropspris" id={this.props.auction.Utropspris} className="form-control" />
+                                <input type="number" style={error.Utropspris ? inputError : null} onChange={this.handleChange} defaultValue={Utropspris} name="Utropspris" id={this.props.auction.Utropspris} className="form-control" />
+                                {error.Utropspris ? (<small>{error.Utropspris}</small>) : null}
                             </div>
                             <div className="form-group">
                                 <button type="submit" className="btn-sm btn-custom">Uppdatera</button>
                             </div>
                         </form>
-                        <br />
-                        {this.state.error.Title ? this.state.error.Title : null}
                     </div>
                 </div>
             )
         } else {
-            return <span>Loading...</span>
+            return <span>Laddar auktionen...</span>
         }
 
     }
 }
+
+const inputError = {
+    border: "2px solid red"
+}
+
+
+
 const mapStateToProps = (state) => {
     return {
         auction: state.auctions.auction

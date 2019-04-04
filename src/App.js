@@ -12,17 +12,15 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App container-fluid">
-          <NavigationBar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path={`/Auctions/:id`} component={AuctionDetails} />
-              <Route path={`/Update/:id`} component={UpdateAuction} />
-              <Route path="/newauction" component={CreateNewAuction} />
-              <Route path="/search" component={SearchList} />
-            </Switch>
-          </div>
+        <NavigationBar />
+        <div className="container pt-3">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path={`/Auctions/:id`} component={AuctionDetails} />
+            <Route path={`/Update/:id`} component={UpdateAuction} />
+            <Route path="/newauction" component={CreateNewAuction} />
+            <Route path="/search" component={SearchList} />
+          </Switch>
         </div>
       </Router>
     );
