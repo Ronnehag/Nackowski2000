@@ -28,7 +28,6 @@ class CreateNewAuction extends Component {
     };
 
     handleChange = (event) => {
-        event.preventDefault();
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -40,7 +39,7 @@ class CreateNewAuction extends Component {
                     errors.Titel = "Titeln får vara max 50 tecken lång"
                 }
 
-                else if (event.target.value.length > 0 && event.target.value.length < 5) {
+                else if (event.target.value.length < 5) {
                     errors.Titel = "Titel är obligatoriskt måste innehålla minst 5 tecken";
                 }
                 else {
@@ -48,7 +47,7 @@ class CreateNewAuction extends Component {
                 }
                 break;
             case "Beskrivning":
-                errors.Beskrivning = event.target.value.length < 0 && event.target.value.length > 5 ? "" : "Beskrivning är obligatoriskt och måste innehålla minst 5 tecken"
+                errors.Beskrivning = event.target.value.length > 5 ? "" : "Beskrivning är obligatoriskt och måste innehålla minst 5 tecken"
                 break;
             default:
                 break;
@@ -60,8 +59,7 @@ class CreateNewAuction extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // TODO: Validering så man inte kan submitta en tom form
-
+        
         if (formValid(this.state.errors)) {
             this.setState({
                 Utropspris: parseInt(this.state.Utropspris),
@@ -100,12 +98,12 @@ class CreateNewAuction extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="titel">Titel</label>
-                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className="form-control" required />
+                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className={errors.Titel.length > 0 ? "form-control error" : "form-control"} required />
                             {errors.Titel.length > 0 && (<span className="errorMessage">{errors.Titel}</span>)}
                         </div>                        
                         <div className="form-group">
                             <label htmlFor="beskrivning">Beskrivning</label>
-                            <textarea onChange={this.handleChange} className="form-control" name="Beskrivning" id="beskrivning" rows="5" required ></textarea>
+                            <textarea onChange={this.handleChange} className={errors.Beskrivning.length > 0 ? "form-control error" : "form-control"} name="Beskrivning" id="beskrivning" rows="5" required ></textarea>
                             {errors.Beskrivning.length > 0 && (<span className="errorMessage">{errors.Beskrivning}</span>)}
                         </div>
                         <div className="form-group">

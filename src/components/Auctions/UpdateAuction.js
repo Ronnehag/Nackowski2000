@@ -114,7 +114,7 @@ class UpdateAuction extends Component {
             const { Titel, Beskrivning, Utropspris } = this.props.auction;
             const { error } = this.state;
             return (
-                <div className="row">
+                <div className="row createAuctionContainer">
                     <div className="col-12 col-sm-12 col-md-8 offset-md-2 offset-lg-2 col-lg-8 createAuctionForm">
                         <h1 className="text-center">Uppdatera auktion</h1>
                         <form onSubmit={this.handleSubmit}>
