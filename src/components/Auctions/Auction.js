@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import { getRemainingTime } from '../../Helpers/DateFunctions';
 export default class Auction extends React.Component {
 
     formatPrice = () => {
@@ -15,17 +15,6 @@ export default class Auction extends React.Component {
     }
 
     render() {
-        var date = new Date(this.props.item.SlutDatum.replace('T', ' '));
-        const dateOptions = {
-            hour12: false,
-            timeZone: "UTC",
-            //year: "numeric",
-            day: "numeric",
-            month: "numeric",
-            weekday: "short",
-            hour: "2-digit",
-            minute: "2-digit"
-        }
 
         let rand = (Math.floor(Math.random() * 50) + 1);
         return (
@@ -41,7 +30,7 @@ export default class Auction extends React.Component {
                                     <p id="price"><strong>{this.formatPrice()} kr</strong> {this.countBids()}</p>
                                 </div>
                                 <div className="col-6 text-right">
-                                    <p id="date-tag">{date.toLocaleString("sv-SE", dateOptions)}</p>
+                                    <p id="date-tag">{getRemainingTime(this.props.item.SlutDatum)}</p>
                                 </div>
                             </div>
                         </div>
