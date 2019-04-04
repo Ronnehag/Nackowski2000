@@ -16,8 +16,10 @@ export default class Auction extends React.Component {
 
     render() {
         let timeLeft = getRemainingTime(this.props.item.SlutDatum);
+        const { valid } = this.props;
 
         let rand = (Math.floor(Math.random() * 50) + 1);
+
         return (
             <div className="col-6 col-md-3 col-lg-3 cardSizing non-link" id="auction-card">
                 <Link to={`/Auctions/${this.props.item.AuktionID}`}>
@@ -31,7 +33,11 @@ export default class Auction extends React.Component {
                                     <p id="price"><strong>{this.formatPrice()} kr</strong> {this.countBids()}</p>
                                 </div>
                                 <div className="col-12 col-md-6 col-lg-6 text-right">
-                                    <p id="date-tag" style={timeLeft.includes("minuter") ? closing : null}>{timeLeft}</p>
+                                    {valid ?
+                                        (<p id="date-tag" style={timeLeft.includes("minuter") ? closing : null}>{timeLeft}</p>)
+                                        :
+                                        (<p id="date-tag" style={closing}>Avslutad</p>)
+                                    }
                                 </div>
                             </div>
                         </div>
