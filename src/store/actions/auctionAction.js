@@ -33,16 +33,15 @@ export function fetchAuctions() {
 export function createAuction(auction) {
     return async dispatch => {
         try {
-            const res = await fetch(auctionURL, {
+            await fetch(auctionURL, {
                 method: 'POST',
-                body: JSON.stringify(auction),
                 headers: {
-                    'Accept': 'application/json, text/plain, */*',
+                    Accept: 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify(auction)
             });
-            const json = await res.json();
-            dispatch({ type: CREATE_NEW_AUCTION, payload: json });
+            dispatch({ type: CREATE_NEW_AUCTION, payload: auction });
         } catch (err) {
             console.log(err);
         }
@@ -50,18 +49,11 @@ export function createAuction(auction) {
 }
 
 export function deleteAuction(id) {
-    console.log(id);
     return async dispatch => {
-        try {
-            const res = await fetch(auctionURL + id, {
-                method: 'DELETE'
-            });
-            dispatch({ type: DELETE_AUCTION, AuktionID: id });
-        }
-        catch (err) {
-            console.log(err);
-        }
-
+        await fetch(auctionURL + id, {
+            method: 'DELETE'
+        });
+        dispatch({ type: DELETE_AUCTION, AuktionID: id });
     }
 }
 export function updateAuction(auction) {

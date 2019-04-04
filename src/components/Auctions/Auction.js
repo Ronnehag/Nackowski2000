@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 export default class Auction extends React.Component {
 
     formatPrice = () => {
@@ -26,7 +27,7 @@ export default class Auction extends React.Component {
             minute: "2-digit"
         }
 
-        let rand = Math.floor(Math.random() * 200);
+        let rand = (Math.floor(Math.random() * 50) + 1);
         return (
             <div className="col-lg-3 cardSizing non-link" id="auction-card">
                 <Link to={`/Auctions/${this.props.item.AuktionID}`}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
+import { getRemainingTime } from '../../Helpers/DateFunctions';
 
 class AuctionDetailsBet extends React.Component {
 
@@ -32,14 +33,20 @@ class AuctionDetailsBet extends React.Component {
         ) : (<span>Finns inga bud</span>);
     }
     render() {
-
+        let date3 = getRemainingTime(this.props.item.SlutDatum);
         return (
-
             <div>
                 <h2>Budgivare</h2>
                 <div className="card">
                     <div className="card-header">
-                        <p>Utropspris: {this.props.item.Utropspris}kr</p>
+                        <div className="row">
+                            <div className="col-6 text-left">
+                                <p>Utropspris: {this.props.item.Utropspris}kr</p>
+                            </div>
+                            <div className="col-6 text-right">
+                                <p>Slutar {date3}</p>
+                            </div>
+                        </div>
                         <div className="input-group">
                             <input className="form-control" onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud" />
                             <button onClick={this.handleClick} className="btn btn-primary btn-sm">skicka</button>

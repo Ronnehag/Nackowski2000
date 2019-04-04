@@ -35,18 +35,13 @@ export default function auctionReducer(state = initialState, action) {
                 ...state,
                 items: action.payload
             }
-        case CREATE_NEW_AUCTION:
-            return {
-                ...state,
-                items: [action.payload, ...state.items]
-            }
         case DELETE_AUCTION:
             return {
                 ...state,
                 items: state.items.filter(a => a.AuktionID !== action.AuktionID)
             }
         case FILTERED_AUCTIONS:
-            let searchvalue = action.payload.toLowerCase();            
+            let searchvalue = action.payload.toLowerCase();
             return {
                 ...state,
                 filteredList: state.items.filter(a => {
@@ -62,7 +57,9 @@ export default function auctionReducer(state = initialState, action) {
                 items: values
             }
 
-        default: return state;
+        case CREATE_NEW_AUCTION:
+        default:
+            return state;
     }
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteAuction } from '../../store/actions/auctionAction';
+import { formatDate } from '../../Helpers/DateFunctions';
 
 class AuctionDetailsView extends React.Component {
     handleClick = () => {
@@ -22,6 +23,7 @@ class AuctionDetailsView extends React.Component {
 
     }
     render() {
+<<<<<<< HEAD
         const user = sessionStorage.getItem("user");
 
         var date = new Date(this.props.item.StartDatum.replace('T', ' '));
@@ -36,6 +38,8 @@ class AuctionDetailsView extends React.Component {
             minute: "2-digit"
         }
 
+=======
+>>>>>>> 96fae9c70b6761f7e947fc17b45277dddb6a7bef
         return (
             <div>
                 <h2>Produkt</h2>
@@ -47,7 +51,7 @@ class AuctionDetailsView extends React.Component {
                                 <div className="text-left">{this.props.item.Titel}</div>
                             </div>
                             <div className="col-6">
-                                <div className="text-right">{date.toLocaleString("sv-SE", dateOptions)}</div>
+                                <div className="text-right">Startade {formatDate(this.props.item.StartDatum)}</div>
                             </div>
                         </div>
                     </div>
