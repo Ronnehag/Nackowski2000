@@ -24,7 +24,7 @@ class AuctionDetailsView extends React.Component {
                     <div className="card-header">
                         <div className="row">
                             <div className="col-6">
-{console.log(this.props.item)}
+                                    {console.log(this.props.item)}
                                 <div className="text-left">{this.props.item.Titel}</div>
                             </div>
                             <div className="col-6">
@@ -43,15 +43,19 @@ class AuctionDetailsView extends React.Component {
                             </Link>
                         </div> : <p>blabla</p> 
                         
-                    
                      }
                     
-                 
-
                     </div>
                 </div>
             </div>
         )
     }
+   
 }
-export default connect()(AuctionDetailsView);
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth.user
+    }
+};
+
+export default connect(mapStateToProps)(AuctionDetailsView);
