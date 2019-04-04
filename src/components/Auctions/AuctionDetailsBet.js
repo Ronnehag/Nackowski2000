@@ -34,6 +34,8 @@ class AuctionDetailsBet extends React.Component {
     }
     render() {
         let date3 = getRemainingTime(this.props.item.SlutDatum);
+        const user = sessionStorage.getItem("user");
+
         return (
             <div>
                 <h2>Budgivare</h2>
@@ -47,10 +49,11 @@ class AuctionDetailsBet extends React.Component {
                                 <p>Slutar {date3}</p>
                             </div>
                         </div>
+                        {user !== null ?  
                         <div className="input-group">
                             <input className="form-control" onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud" />
-                            <button onClick={this.handleClick} className="btn btn-primary btn-sm">skicka</button>
-                        </div>
+                            <button onClick={this.handleClick} className="btn btn-primary btn-sm">Lägg bud</button>
+                        </div> :<p></p> }
                     </div>
                     <h6>Budgivare</h6>
                     <div className="card-body">
@@ -72,7 +75,9 @@ const first = {
 
 const mapStateToProps = (state) => {
     return {
-        auction: state.auctions.auction
+        auction: state.auctions.auction,
+        user: state.auth.user
+
     }
 }
 
