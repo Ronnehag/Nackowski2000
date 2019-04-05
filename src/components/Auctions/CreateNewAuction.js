@@ -59,7 +59,7 @@ class CreateNewAuction extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        
+
         if (formValid(this.state.errors)) {
             this.setState({
                 Utropspris: parseInt(this.state.Utropspris),
@@ -86,36 +86,49 @@ class CreateNewAuction extends Component {
     render() {
         const endDate = moment(this.state.SlutDatum).format("YYYY-MM-DD");
 
-        const {errors} = this.state;
+        const { errors } = this.state;
 
         return (
-            <div className="createAuctionContainer">
-                <div className="col-12 col-sm-12 col-md-8 offset-md-2 offset-lg-2 col-lg-8 createAuctionForm">
+            <div className="row createAuctionContainer">
+                <div className="col-12 col-sm-12 offset-lg-2 col-lg-8 createAuctionForm">
                     <h1 className="text-center">Skapa ny auktion</h1>
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="titel">Titel</label>
-                            <input type="text" onChange={this.handleChange} name="Titel" id="titel" className={errors.Titel.length > 0 ? "form-control error" : "form-control"} required />
-                            {errors.Titel.length > 0 && (<span className="errorMessage">{errors.Titel}</span>)}
-                        </div>                        
-                        <div className="form-group">
-                            <label htmlFor="beskrivning">Beskrivning</label>
-                            <textarea onChange={this.handleChange} className={errors.Beskrivning.length > 0 ? "form-control error" : "form-control"} name="Beskrivning" id="beskrivning" rows="5" required ></textarea>
-                            {errors.Beskrivning.length > 0 && (<span className="errorMessage">{errors.Beskrivning}</span>)}
+                        <div className="row">
+                            <div className="form-group col-12 col-sm-12 offset-md-1 offset-lg-1 col-md-6 col-lg-6">
+                                <label htmlFor="titel">Titel</label>
+                                <input type="text" onChange={this.handleChange} name="Titel" id="titel" className={errors.Titel.length > 0 ? "form-control error" : "form-control"} required />
+                                {errors.Titel.length > 0 && (<span className="errorMessage">{errors.Titel}</span>)}
+                            </div>
+                            <div className="col-12 col-sm-12 col-md-4 col-lg-4 form-group">
+                                <label htmlFor="utropspris">Utropspris</label>
+                                <input type="number" onChange={this.handleChange} name="Utropspris" id="utropspris" className="form-control" />
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="utropspris">Utropspris</label>
-                            <input type="number" onChange={this.handleChange} name="Utropspris" id="utropspris" className="form-control" />
+                        <div className="row">
+                            <div className="form-group col-12 col-sm-12 offset-md-1 offset-lg-1 col-md-10 col-lg-10">
+                                <label htmlFor="beskrivning">Beskrivning</label>
+                                <textarea onChange={this.handleChange} className={errors.Beskrivning.length > 0 ? "form-control error" : "form-control"} name="Beskrivning" id="beskrivning" rows="5" required ></textarea>
+                                {errors.Beskrivning.length > 0 && (<span className="errorMessage">{errors.Beskrivning}</span>)}
+                            </div>
                         </div>
-                        <div id="endText">
-                            <p>Din auktion kommer att vara giltig i 10 dagar fr.o.m. att den skapas.</p>
+                        <div className="row text-center">
+                            <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div id="endText text-center">
+                                    <p>Din auktion kommer att vara giltig i 10 dagar fr.o.m. att den skapas.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <button type="submit" className="btn-sm btn-custom">Skapa</button>
+                        <div className="row">
+                            <div className="col-12 col-sm-12 col-md-10 offset-md-1 offset-lg-1 col-lg-10">
+                                <div className="form-group">
+                                    <button type="submit" className="btn-sm btn-custom">Skapa</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
-            </div>);
+            </div>
+        );
     }
 }
 
