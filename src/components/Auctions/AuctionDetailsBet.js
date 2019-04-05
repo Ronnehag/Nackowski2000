@@ -25,7 +25,7 @@ class AuctionDetailsBet extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-        
+
         let error = this.state.error;
         switch (e.target.name) {
             case "amount":
@@ -34,6 +34,9 @@ class AuctionDetailsBet extends React.Component {
                 }
                 else if (e.target.value < this.props.bids.Summa) {
                     error.amount = "Budet måste vara högre än tidigare bud"
+                }
+                else{
+                    error.amount = "";
                 }
                 break;
             default:
