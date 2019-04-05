@@ -12,7 +12,7 @@ class NavigationBar extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-lg  nav-custom">
-                    <Link className="navbar-brand ml-2" to="/">AuctionSite</Link>
+                    <Link className="navbar-brand ml-2 navbarText" to="/">Aredart</Link>
                     <button className="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
