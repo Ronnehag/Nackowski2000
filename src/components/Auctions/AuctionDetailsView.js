@@ -35,7 +35,7 @@ class AuctionDetailsView extends React.Component {
                         {this.props.item.Beskrivning}
                     </div>
                     <div className="card-footer">
-                        <img className="img-fluid pb-3" src="https://picsum.photos/500/200/?random" alt="auktionsbild" />
+                        <img className="img-fluid pb-3" src="https://picsum.photos/600/200/?random" alt="auktionsbild" />
                         <br />
                         {user === this.props.item.SkapadAv ?
                             <div>
