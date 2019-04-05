@@ -1,6 +1,6 @@
 import moment from 'moment';
 import localization from 'moment/locale/sv';
-moment.locale("sv", localization);
+moment.updateLocale("sv", localization);
 
 // Returerar i tid (dagar/timmar etc.) kvar av annonsen
 export function getRemainingTime(date) {

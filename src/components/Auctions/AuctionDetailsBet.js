@@ -78,7 +78,7 @@ class AuctionDetailsBet extends React.Component {
                 return a.Summa < b.Summa ? 1 : -1;
             }).map(((k, i) => {
                 return (
-                    <li key={k.BudID} style={i == 0 ? first : null} className="list-group-item">{k.Budgivare} {k.Summa}kr</li>
+                    <li key={k.BudID || i} style={i == 0 ? first : null} className="list-group-item">{k.Budgivare} {k.Summa}kr</li>
                 );
             }))
         ) : (<span>Finns inga bud</span>);
@@ -109,7 +109,7 @@ class AuctionDetailsBet extends React.Component {
                         {user !== null && valid ?
                             <form className="row" onSubmit={this.handleSubmit}>
                                 <div className="input-group mt-2 col-12">
-                                    <input onChange={this.handleChange} value={this.state.amount || null} name="amount" type="number" placeholder="Lägg bud"
+                                    <input onChange={this.handleChange} value={this.state.amount} name="amount" type="number" placeholder="Lägg bud"
                                         className={error.amount.length > 0 ? "form-control error" : "form-control"} required
                                     />
                                     <button className="btn btn-sm btn-primary ml-2">Lägg bud</button>

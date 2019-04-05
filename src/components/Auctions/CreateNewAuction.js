@@ -84,8 +84,6 @@ class CreateNewAuction extends Component {
     }
 
     render() {
-        const endDate = moment(this.state.SlutDatum).format("YYYY-MM-DD");
-
         const { errors } = this.state;
 
         return (

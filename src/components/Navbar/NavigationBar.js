@@ -13,10 +13,10 @@ class NavigationBar extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-lg nav-custom">
-                    <div class="brand-div">
+                    <div className="brand-div">
                         <Link className="navbar-brand ml-2 navbarText" to="/">Aredart</Link>
                         <div className="img-div">
-                            <img src={purpleGavel} />
+                            <img src={purpleGavel} alt="lila hammare"/>
                         </div>
                     </div>
 

@@ -9,7 +9,7 @@ class AuctionList extends React.Component {
         const currentDate = moment().format("YYYY-MM-DDTHH:mm:ss");
         if (this.props.auctions.length) {
             return this.props.auctions.filter(auction => {
-                if (auction.SlutDatum > currentDate) return auction;
+                return auction.SlutDatum > currentDate
             }).sort((a, b) => {
                 if (a.SlutDatum === b.SlutDatum) return 0;
                 return a.SlutDatum > b.SlutDatum ? 1 : -1;

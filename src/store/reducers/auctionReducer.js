@@ -46,8 +46,7 @@ export default function auctionReducer(state = initialState, action) {
                 ...state,
                 filteredList: state.items.filter(a => {
                     let titelLower = a.Titel.toLowerCase();
-                    if (titelLower.includes(searchvalue))
-                        return a;
+                    return titelLower.includes(searchvalue)
                 })
             }
         case UPDATE_AUCTION:
