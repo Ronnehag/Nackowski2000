@@ -19,7 +19,7 @@ class AuctionDetailsBet extends React.Component {
             [e.target.name]: e.target.value
         })
         const { amount } = this.state;
-        let error = this.state.error;
+        let error = this.state;
         switch (e.target.name) {
             case amount:
                 if (e.target.value < this.props.item.Utropspris) {
