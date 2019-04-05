@@ -16,12 +16,12 @@ class UpdateAuction extends Component {
         error: {
             Titel: "",
             Beskrivning: "",
-            Utropspris: ""
+            HarBud: ""
         }
     };
 
     validateInput = (name) => {
-        const { Titel, Beskrivning, Utropspris } = this.state;
+        const { Titel, Beskrivning } = this.state;
         switch (name) {
             case "Titel":
                 if (Titel.length < 5) {
@@ -50,20 +50,6 @@ class UpdateAuction extends Component {
                     }));
                 }
                 break;
-
-            case "Utropspris":
-                {
-                    if (Utropspris == 0) {
-                        this.setState(prevState => ({
-                            error: { ...prevState.error, [name]: `${name} får inte vara 0 kr` }
-                        }));
-                    } else {
-                        this.setState(prevState => ({
-                            error: { ...prevState.error, [name]: "" }
-                        }));
-                    }
-                }
-                break;
             default:
                 return null;
         }
@@ -76,16 +62,32 @@ class UpdateAuction extends Component {
         }, () => this.validateInput(name));
     }
 
+    controlIfBids = (callback) => {
+        let url = `http://nackowskis.azurewebsites.net/api/bud/2000/${this.state.AuktionID}`;
+        fetch(url)
+            .then(res => res.json()
+                .then(data => {
+                    callback(data.length === 0);
+                }));
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const { error } = this.state;
-        for (const key in this.state) {
-            this.validateInput(key);
-        }
         if (error.Titel || error.Beskrivning || error.Utropspris) return;
-        this.props.dispatch(updateAuction(this.state))
-        this.props.history.push({ pathname: "/" });
+        this.controlIfBids((bool) => {
+            console.log(bool);
+            if (bool) {
+                this.props.dispatch(updateAuction(this.state))
+                this.props.history.push({ pathname: "/" });
+            } else {
+                this.setState(prevState => ({
+                    error: { ...prevState.error, HarBud: "Auktionen har fått ett bud och kan inte längre uppdateras." }
+                }));
+            }
+        });
     }
+
     componentDidUpdate(prevProps) {
         if (this.props.auction !== prevProps.auction) {
             this.setState({
@@ -115,27 +117,39 @@ class UpdateAuction extends Component {
             return (
                 <div className="row createAuctionContainer">
                     <div className="col-12 col-sm-12 col-md-8 offset-md-2 offset-lg-2 col-lg-8 createAuctionForm">
-                        <h1 className="text-center">Uppdatera auktion</h1>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="titel">Titel</label>
-                                <input type="text" onChange={this.handleChange} style={error.Titel ? inputError : null} name="Titel" defaultValue={Titel} id="Titel" className="form-control" required autoComplete="off" />
-                                {error.Titel && (<small>{error.Titel}</small>)}
+                        <h2 className="text-center mt-3">Uppdatera auktion</h2>
+                        <div className="row">
+                            <div className="col-md-10 col-lg-10 offset-md-1 offset-lg-1">
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="row">
+                                        <div className="col-12 col-sm-12 col-md-8 col-lg-8 from-group mt-1">
+                                            <label htmlFor="Titel">Titel</label>
+                                            <input type="text" onChange={this.handleChange} style={error.Titel ? inputError : null} name="Titel" defaultValue={Titel} id="Titel" className="form-control" required autoComplete="off" />
+                                            {error.Titel && (<small>{error.Titel}</small>)}
+                                        </div>
+                                        <div className="col-12 col-sm-12 col-md-4 col-lg-4 form-group mt-1">
+                                            <label htmlFor="Utropspris">Utropspris</label>
+                                            <input type="number" onChange={this.handleChange} defaultValue={Utropspris} name="Utropspris" id="Utropspris" className="form-control" />
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+                                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 mt-1">
+                                            <label htmlFor="beskrivning">Beskrivning</label>
+                                            <textarea onChange={this.handleChange} style={error.Beskrivning ? inputError : null} className="form-control" name="Beskrivning" defaultValue={Beskrivning} id={this.props.auction.Beskrivning} rows="10" required ></textarea>
+                                            {error.Beskrivning && (<small>{error.Beskrivning}</small>)}
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <button type="submit" className="btn-sm btn-custom">Uppdatera</button>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-12 text-center">
+                                            {error.HarBud && (<small>{error.HarBud}</small>)}
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="beskrivning">Beskrivning</label>
-                                <textarea onChange={this.handleChange} style={error.Beskrivning ? inputError : null} className="form-control" name="Beskrivning" defaultValue={Beskrivning} id={this.props.auction.Beskrivning} rows="5" required ></textarea>
-                                {error.Beskrivning && (<small>{error.Beskrivning}</small>)}
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="utropspris">Utropspris</label>
-                                <input type="number" style={error.Utropspris ? inputError : null} onChange={this.handleChange} defaultValue={Utropspris} name="Utropspris" id={this.props.auction.Utropspris} className="form-control" />
-                                {error.Utropspris ? (<small>{error.Utropspris}</small>) : null}
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn-sm btn-custom">Uppdatera</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             )
