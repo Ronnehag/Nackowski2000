@@ -24,7 +24,7 @@ export default class Auction extends React.Component {
             <div className="col-6 col-md-3 col-lg-3 cardSizing non-link" id="auction-card">
                 <Link to={`/Auctions/${this.props.item.AuktionID}`}>
                     <div className="card">
-                        <img className="card-img-top img-fluid" src={`https://picsum.photos/200/200/?image=${rand}`} alt="auktionsbild" />
+                        <img className="card-img-top img-fluid" src={`https://picsum.photos/200/150/?image=${rand}`} alt="auktionsbild" />
                         <div className="card-body">
                             <h6 className="card-title">{this.props.item.Titel.substr(0, 15)} </h6>
                             <p className="card-text non-link">{this.props.item.Beskrivning.substr(0, 20) + "..."}</p>

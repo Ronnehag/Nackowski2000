@@ -18,7 +18,7 @@ class AuctionDetailsView extends React.Component {
         const user = sessionStorage.getItem("user");
 
         return (
-            <div className="mt-5">
+            <div>
                 <div className="card">
                     <div className="card-header">
                         <div className="row">
@@ -35,6 +35,8 @@ class AuctionDetailsView extends React.Component {
                         {this.props.item.Beskrivning}
                     </div>
                     <div className="card-footer">
+                        <img className="img-fluid pb-3" src="https://picsum.photos/500/200/?random" alt="auktionsbild" />
+                        <br />
                         {user === this.props.item.SkapadAv ?
                             <div>
                                 <button type="button" className="btn btn-danger" onClick={this.handleClick}>Ta bort</button>
@@ -44,12 +46,6 @@ class AuctionDetailsView extends React.Component {
                             </div> : <p>Skapad av: {this.props.item.SkapadAv}</p>
 
                         }
-
-                    </div>
-                </div>
-                <div className="row mt-5">
-                    <div className="col-12 text-center">
-                        <img className="img-fluid" src="https://picsum.photos/500/300/?random" alt="auktionsbild" />
                     </div>
                 </div>
             </div>

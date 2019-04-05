@@ -78,7 +78,7 @@ class AuctionDetailsBet extends React.Component {
         console.log(error);
 
         return (
-            <div className="mt-5">
+            <div>
                 <div className="card">
                     <div className="card-header">
                         <div className="row">
