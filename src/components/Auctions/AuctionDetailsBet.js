@@ -23,40 +23,37 @@ class AuctionDetailsBet extends React.Component {
     }
 
     handleChange = (e) => {
+        let name = e.target.name;
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: Math.ceil(e.target.value)
+        }, () => {
+            let highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+            let error = this.state.error;
+            const { amount } = this.state;
+
+            switch (name) {
+                case "amount":
+                    if (amount < this.props.item.Utropspris) {
+                        error.amount = "Budet måste vara högre än utropspriset"
+                    }
+                    else if (amount <= highest) {
+                        error.amount = "Budet måste vara högre än tidigare bud"
+                    }
+                    else {
+                        error.amount = "";
+                    }
+                    break;
+                default:
+                    break;
+            };
+            this.setState({ error });
         });
-
-        let highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
-
-        let error = this.state.error;
-        switch (e.target.name) {
-            case "amount":
-                if (e.target.value < this.props.item.Utropspris) {
-                    error.amount = "Budet måste vara högre än utropspriset"
-                }
-                else if (e.target.value <= highest) {
-                    error.amount = "Budet måste vara högre än tidigare bud"
-                }
-                else {
-                    error.amount = "";
-                }
-                break;
-            default:
-                break;
-        };
-        this.setState({ error, [e.target.name]: e.target.value });
-
     }
-
 
     handleClick = (e) => {
         e.preventDefault();
-
         if (bidValid(this.state.error)) {
-
             this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
-
         }
     }
 
@@ -93,18 +90,23 @@ class AuctionDetailsBet extends React.Component {
                                 <p>Utropspris: {this.props.item.Utropspris}kr</p>
                             </div>
                             <div className="col-6 text-right">
-                            {valid? <p>Slutar {date3}</p> : <p className="errorMessage">Avslutad</p> }                                
+                                {valid ? <p>Slutar {date3}</p> : <p className="errorMessage">Avslutad</p>}
                             </div>
                         </div>
                         {user !== null && valid ?
-                            <div className="input-group mt-2">
-                                <input onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud"
-                                    className={error.amount.length > 0 ? "form-control error" : "form-control"} required
-                                />
-                                {error.amount.length > 0 && (<span className="errorMessage">{error.amount}</span>)}
+                            <div className="row">
+                                <div className="input-group mt-2 col-12">
+                                    <input onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud"
+                                        className={error.amount.length > 0 ? "form-control error" : "form-control"} required
+                                    />
+                                    <button onClick={this.handleClick} className="btn btn-sm btn-primary ml-2">Lägg bud</button>
+                                </div>
+                                <div className="col-12 mt-1">
+                                    {error.amount.length > 0 && (<span className="errorMessage">{error.amount}</span>)}
+                                </div>
+                            </div>
 
-                                <button onClick={this.handleClick} className="btn btn-sm btn-primary ml-2">Lägg bud</button>
-                            </div> : <p></p>}
+                            : null}
                     </div>
                     {valid ? <div className="card-body">
                         <h6>Budgivare</h6>
