@@ -7,7 +7,7 @@ body {
   background-color: whitesmoke;
   line-height: 1.4;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Open-sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -19,8 +19,9 @@ p{
   margin: 0;
 }
 h1,h2,h3,h4,h5,h6{
+  font-family: "Open-sans", sans-serif;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 600;
 }
 .mt-10{
   margin-top: 10em;
