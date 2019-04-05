@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
 import { getRemainingTime } from '../../Helpers/DateFunctions';
+import moment from 'moment';
 
 const bidValid = error => {
     let valid = true;
@@ -26,7 +27,7 @@ class AuctionDetailsBet extends React.Component {
             [e.target.name]: e.target.value
         });
 
-        var highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+        let highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
 
         let error = this.state.error;
         switch (e.target.name) {
@@ -37,14 +38,14 @@ class AuctionDetailsBet extends React.Component {
                 else if (e.target.value <= highest) {
                     error.amount = "Budet måste vara högre än tidigare bud"
                 }
-                else{
+                else {
                     error.amount = "";
                 }
                 break;
             default:
                 break;
         };
-        this.setState({ error, [e.target.name]: e.target.value });        
+        this.setState({ error, [e.target.name]: e.target.value });
 
     }
 
@@ -54,10 +55,10 @@ class AuctionDetailsBet extends React.Component {
 
         if (bidValid(this.state.error)) {
 
-        this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
-            
-        }        
-    }    
+            this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+
+        }
+    }
 
     getBid = () => {
         return this.props.bids.length ? (
@@ -79,6 +80,11 @@ class AuctionDetailsBet extends React.Component {
         const user = sessionStorage.getItem("user");
         console.log(error);
 
+        let valid = this.props.item.SlutDatum > moment().format();
+        console.log('valid: ' + valid);
+
+        let highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+
         return (
             <div>
                 <div className="card">
@@ -91,7 +97,7 @@ class AuctionDetailsBet extends React.Component {
                                 <p>Slutar {date3}</p>
                             </div>
                         </div>
-                        {user !== null ?
+                        {user !== null && valid ?
                             <div className="input-group mt-2">
                                 <input onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud"
                                     className={error.amount.length > 0 ? "form-control error" : "form-control"} required
@@ -101,12 +107,17 @@ class AuctionDetailsBet extends React.Component {
                                 <button onClick={this.handleClick} className="btn btn-sm btn-primary ml-2">Lägg bud</button>
                             </div> : <p></p>}
                     </div>
-                    <div className="card-body">
+                    {valid ? <div className="card-body">
                         <h6>Budgivare</h6>
                         <ul className="list-group">
                             {this.getBid()}
                         </ul>
-                    </div>
+                    </div> : <div className="card-body">
+                            <h6>Avslutande bud</h6>
+                            {this.props.bids.length > 0 ? <p>{highest} kr</p> : <p>Auktionen avslutades utan bud</p>}
+
+                        </div>}
+
                 </div>
             </div>
 
