@@ -25,7 +25,7 @@ class AuctionDetailsBet extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-        //const { amount } = this.state;
+        
         let error = this.state.error;
         switch (e.target.name) {
             case "amount":
@@ -103,7 +103,7 @@ class AuctionDetailsBet extends React.Component {
                         </ul>
                     </div>
                 </div>
-            </div >
+            </div>
 
         )
     }
