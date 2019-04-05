@@ -26,13 +26,15 @@ class AuctionDetailsBet extends React.Component {
             [e.target.name]: e.target.value
         });
 
+        var highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+
         let error = this.state.error;
         switch (e.target.name) {
             case "amount":
                 if (e.target.value < this.props.item.Utropspris) {
                     error.amount = "Budet måste vara högre än utropspriset"
                 }
-                else if (e.target.value < this.props.bids.Summa) {
+                else if (e.target.value <= highest) {
                     error.amount = "Budet måste vara högre än tidigare bud"
                 }
                 else{
@@ -55,7 +57,7 @@ class AuctionDetailsBet extends React.Component {
         this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
             
         }        
-    }
+    }    
 
     getBid = () => {
         return this.props.bids.length ? (
