@@ -76,7 +76,6 @@ class UpdateAuction extends Component {
         const { error } = this.state;
         if (error.Titel || error.Beskrivning || error.Utropspris) return;
         this.controlIfBids((bool) => {
-            console.log(bool);
             if (bool) {
                 this.props.dispatch(updateAuction(this.state))
                 this.props.history.push({ pathname: "/" });
