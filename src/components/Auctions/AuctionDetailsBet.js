@@ -3,44 +3,58 @@ import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
 import { getRemainingTime } from '../../Helpers/DateFunctions';
 
+const bidValid = error => {
+    let valid = true;
+
+    Object.values(error).forEach(val => {
+        val.length > 0 && (valid = false)
+    })
+    return valid;
+}
+
 class AuctionDetailsBet extends React.Component {
 
     state = {
         amount: 0,
         error: {
-            Titel: "",
-            Beskrivning: "",
-            Utropspris: ""
+            amount: ""
         }
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-        })
-        const { amount } = this.state;
-        let error = this.state;
+        });
+
+        let error = this.state.error;
         switch (e.target.name) {
-            case amount:
+            case "amount":
                 if (e.target.value < this.props.item.Utropspris) {
-                    error.Titel = "Budet måste vara högre än utropspriset"
+                    error.amount = "Budet måste vara högre än utropspriset"
                 }
                 else if (e.target.value < this.props.bids.Summa) {
-                    error.Titel = "Budet måste vara högre än tidigare bud"
+                    error.amount = "Budet måste vara högre än tidigare bud"
+                }
+                else{
+                    error.amount = "";
                 }
                 break;
             default:
                 break;
         };
-        this.setState({ error, [e.target.name]: e.target.value });
-        console.log(this.state.error);
+        this.setState({ error, [e.target.name]: e.target.value });        
 
     }
 
 
     handleClick = (e) => {
         e.preventDefault();
+
+        if (bidValid(this.state.error)) {
+
         this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+            
+        }        
     }
 
     getBid = () => {
@@ -78,9 +92,9 @@ class AuctionDetailsBet extends React.Component {
                         {user !== null ?
                             <div className="input-group mt-2">
                                 <input onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud"
-                                    className={error.Titel.length > 0 ? "form-control error" : "form-control"} required
+                                    className={error.amount.length > 0 ? "form-control error" : "form-control"} required
                                 />
-                                {error.Titel.length > 0 && (<span className="errorMessage">{error.Titel}</span>)}
+                                {error.amount.length > 0 && (<span className="errorMessage">{error.amount}</span>)}
 
                                 <button onClick={this.handleClick} className="btn btn-sm btn-primary ml-2">Lägg bud</button>
                             </div> : <p></p>}
