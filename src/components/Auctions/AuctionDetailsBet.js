@@ -37,14 +37,14 @@ class AuctionDetailsBet extends React.Component {
                 else if (e.target.value <= highest) {
                     error.amount = "Budet måste vara högre än tidigare bud"
                 }
-                else{
+                else {
                     error.amount = "";
                 }
                 break;
             default:
                 break;
         };
-        this.setState({ error, [e.target.name]: e.target.value });        
+        this.setState({ error, [e.target.name]: e.target.value });
 
     }
 
@@ -54,10 +54,10 @@ class AuctionDetailsBet extends React.Component {
 
         if (bidValid(this.state.error)) {
 
-        this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
-            
-        }        
-    }    
+            this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+
+        }
+    }
 
     getBid = () => {
         return this.props.bids.length ? (
@@ -77,7 +77,6 @@ class AuctionDetailsBet extends React.Component {
 
         let date3 = getRemainingTime(this.props.item.SlutDatum);
         const user = sessionStorage.getItem("user");
-        console.log(error);
 
         return (
             <div>
