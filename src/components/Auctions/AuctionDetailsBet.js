@@ -92,7 +92,7 @@ class AuctionDetailsBet extends React.Component {
                         </ul>
                     </div>
                 </div>
-            </div >
+            </div>
 
         )
     }
