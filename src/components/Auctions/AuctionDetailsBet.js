@@ -4,22 +4,32 @@ import { placeBet } from '../../store/actions/auctionAction';
 import { getRemainingTime } from '../../Helpers/DateFunctions';
 import moment from 'moment';
 
-const bidValid = error => {
-    let valid = true;
 
-    Object.values(error).forEach(val => {
-        val.length > 0 && (valid = false)
-    })
-    return valid;
-}
 
 class AuctionDetailsBet extends React.Component {
 
-    state = {
-        amount: 0,
-        error: {
-            amount: ""
+    static initialState = () => {
+        return {
+            amount: "Lägg bud",
+            error: {
+                amount: ""
+            }
         }
+    }
+
+    getHighestBid = () => {
+        return Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+    }
+
+    state = AuctionDetailsBet.initialState();
+
+    bidValid = () => {
+        const { error } = this.state;
+        const { amount } = this.state;
+        if (error.amount.length > 0 || amount < this.getHighestBid()) return false;
+
+        return true;
+
     }
 
     handleChange = (e) => {
@@ -27,7 +37,7 @@ class AuctionDetailsBet extends React.Component {
         this.setState({
             [e.target.name]: Math.ceil(e.target.value)
         }, () => {
-            let highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+            let highest = this.getHighestBid();
             let error = this.state.error;
             const { amount } = this.state;
 
@@ -46,14 +56,18 @@ class AuctionDetailsBet extends React.Component {
                 default:
                     break;
             };
-            this.setState({ error });
+            this.setState(prevState => ({
+                ...prevState,
+                error: error
+            }));
         });
     }
 
-    handleClick = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        if (bidValid(this.state.error)) {
+        if (this.bidValid()) {
             this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+            this.setState(AuctionDetailsBet.initialState());
         }
     }
 
@@ -77,9 +91,8 @@ class AuctionDetailsBet extends React.Component {
         const user = sessionStorage.getItem("user");
 
         let valid = this.props.item.SlutDatum > moment().format();
-        console.log('valid: ' + valid);
 
-        let highest = Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+        let highest = this.getHighestBid();
 
         return (
             <div>
@@ -94,17 +107,17 @@ class AuctionDetailsBet extends React.Component {
                             </div>
                         </div>
                         {user !== null && valid ?
-                            <div className="row">
+                            <form className="row" onSubmit={this.handleSubmit}>
                                 <div className="input-group mt-2 col-12">
-                                    <input onChange={this.handleChange} name="amount" type="number" placeholder="Lägg bud"
+                                    <input onChange={this.handleChange} value={this.state.amount || null} name="amount" type="number" placeholder="Lägg bud"
                                         className={error.amount.length > 0 ? "form-control error" : "form-control"} required
                                     />
-                                    <button onClick={this.handleClick} className="btn btn-sm btn-primary ml-2">Lägg bud</button>
+                                    <button className="btn btn-sm btn-primary ml-2">Lägg bud</button>
                                 </div>
                                 <div className="col-12 mt-1">
                                     {error.amount.length > 0 && (<span className="errorMessage">{error.amount}</span>)}
                                 </div>
-                            </div>
+                            </form>
 
                             : null}
                     </div>
