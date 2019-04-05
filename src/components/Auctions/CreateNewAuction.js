@@ -64,7 +64,6 @@ class CreateNewAuction extends Component {
             this.setState({
                 Utropspris: parseInt(this.state.Utropspris),
                 StartDatum: moment().format("YYYY-MM-DDTHH:mm:ss"),
-                // SlutDatum: moment(this.state.StartDatum, "YYYY-MM-DDTHH:mm:ss").add(10, 'days'),
                 SkapadAv: sessionStorage.getItem("user")
             }, () => {
                 this.props.dispatch(createAuction(this.state))
@@ -108,7 +107,7 @@ class CreateNewAuction extends Component {
                             <label htmlFor="utropspris">Utropspris</label>
                             <input type="number" onChange={this.handleChange} name="Utropspris" id="utropspris" className="form-control" />
                         </div>
-                        <div>
+                        <div id="endText">
                             <p>Din auktion kommer att vara giltig i 10 dagar fr.o.m. att den skapas.</p>
                         </div>
                         <div className="form-group">

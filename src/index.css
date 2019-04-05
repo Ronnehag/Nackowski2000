@@ -139,5 +139,9 @@ img{
   background-color: rgb(253, 232, 199);
 }
 
+#endText p{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 
