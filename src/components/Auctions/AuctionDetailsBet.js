@@ -93,7 +93,7 @@ class AuctionDetailsBet extends React.Component {
                                 <p>Utropspris: {this.props.item.Utropspris}kr</p>
                             </div>
                             <div className="col-6 text-right">
-                                <p>Slutar {date3}</p>
+                            {valid? <p>Slutar {date3}</p> : <p className="errorMessage">Avslutad</p> }                                
                             </div>
                         </div>
                         {user !== null && valid ?
