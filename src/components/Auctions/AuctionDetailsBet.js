@@ -78,7 +78,6 @@ class AuctionDetailsBet extends React.Component {
 
         let date3 = getRemainingTime(this.props.item.SlutDatum);
         const user = sessionStorage.getItem("user");
-        console.log(error);
 
         let valid = this.props.item.SlutDatum > moment().format();
         console.log('valid: ' + valid);

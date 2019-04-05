@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateAuction, fetchSingleAuction } from '../../store/actions/auctionAction';
+import { controlIfBids } from '../../Helpers/BidControll';
 
 class UpdateAuction extends Component {
 
@@ -62,20 +63,11 @@ class UpdateAuction extends Component {
         }, () => this.validateInput(name));
     }
 
-    controlIfBids = (callback) => {
-        let url = `http://nackowskis.azurewebsites.net/api/bud/2000/${this.state.AuktionID}`;
-        fetch(url)
-            .then(res => res.json()
-                .then(data => {
-                    callback(data.length === 0);
-                }));
-    }
-
     handleSubmit = (event) => {
         event.preventDefault();
         const { error } = this.state;
         if (error.Titel || error.Beskrivning || error.Utropspris) return;
-        this.controlIfBids((bool) => {
+        controlIfBids(this.state.AuktionID, (bool) => {
             if (bool) {
                 this.props.dispatch(updateAuction(this.state))
                 this.props.history.push({ pathname: "/" });
