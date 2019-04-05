@@ -37,7 +37,7 @@ class AuctionDetailsView extends React.Component {
                     <div className="card-footer">
                         <img className="img-fluid pb-3" src="https://picsum.photos/600/200/?random" alt="auktionsbild" />
                         <br />
-                        {user === this.props.item.SkapadAv ?
+                        {user === this.props.item.SkapadAv ? 
                             <div>
                                 <button type="button" className="btn btn-danger" onClick={this.handleClick}>Ta bort</button>
                                 <Link to={`/Update/${this.props.item.AuktionID}`}>
