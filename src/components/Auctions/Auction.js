@@ -34,7 +34,7 @@ export default class Auction extends React.Component {
                                 </div>
                                 <div className="col-12 col-md-6 col-lg-6 text-right">
                                     {valid ?
-                                        (<p id="date-tag" style={timeLeft.includes("minuter") ? closing : null}>{timeLeft}</p>)
+                                        (<p id="date-tag" style={timeLeft.includes("minuter") || timeLeft.includes("minut") || timeLeft.includes("sekunder") ? closing : null}>{timeLeft}</p>)
                                         :
                                         (<p id="date-tag" style={closing}>Avslutad</p>)
                                     }
