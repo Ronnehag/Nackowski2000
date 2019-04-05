@@ -4,15 +4,22 @@ import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
 import SearchForm from './SearchForm';
 import SignedInLinks from './SignedInLinks';
+import purpleGavel from '../../img/purpleGavel.png';
 
 class NavigationBar extends Component {
     render() {
         const user = sessionStorage.getItem("user");
-        const { username, isLoggedIn } = this.props.user;
+        const { isLoggedIn } = this.props.user;
         return (
             <div>
-                <nav className="navbar navbar-expand-lg  nav-custom">
-                    <Link className="navbar-brand ml-2 navbarText" to="/">Aredart</Link>
+                <nav className="navbar navbar-expand-lg nav-custom">
+                    <div class="brand-div">
+                        <Link className="navbar-brand ml-2 navbarText" to="/">Aredart</Link>
+                        <div className="img-div">
+                            <img src={purpleGavel} />
+                        </div>
+                    </div>
+
                     <button className="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const FETCH_ALL_AUCTIONS = "FETCH_ALL_AUCTIONS";
 export const CREATE_NEW_AUCTION = "CREATE_NEW_AUCTION";
 export const DELETE_AUCTION = "DELETE_AUCTION";
@@ -32,6 +34,10 @@ export function fetchAuctions() {
 
 export function createAuction(auction) {
     return async dispatch => {
+        auction = {
+            ...auction,
+            SlutDatum: moment(auction.StartDatum).add(10, "days").format("YYYY-MM-DDTHH:mm:ss")
+        }
         try {
             await fetch(auctionURL, {
                 method: 'POST',

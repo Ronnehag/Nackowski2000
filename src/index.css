@@ -107,6 +107,25 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 /*END HOME*/
 
+.brand-div a{
+  position: relative;
+  z-index: 1;
+}
+.img-div img{
+  max-width: 50px;
+  z-index: -1;
+}
+.img-div{
+  position: absolute;
+  top: -1px;
+  left: 25px;
+}
+@media only screen and (max-width: 600px) {
+  .img-div img{
+    display: none;
+  }
+}
+
 
 /*CREATE AUCTION*/
 .createAuctionForm{
