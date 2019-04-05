@@ -114,8 +114,6 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 .img-div img{
   max-width: 50px;
   z-index: -1;
-  border: 1px solid white;
-  border-radius: 50%;
 }
 .img-div{
   position: absolute;
