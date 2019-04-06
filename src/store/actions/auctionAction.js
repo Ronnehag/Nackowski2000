@@ -34,7 +34,7 @@ export function fetchAuctions() {
 
 export function createAuction(auction) {
     return async dispatch => {
-        auction = {
+        const newAuction = {
             ...auction,
             SlutDatum: moment(auction.StartDatum).add(10, "days").format("YYYY-MM-DDTHH:mm:ss")
         }
@@ -45,9 +45,9 @@ export function createAuction(auction) {
                     Accept: 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(auction)
+                body: JSON.stringify(newAuction)
             });
-            dispatch({ type: CREATE_NEW_AUCTION, payload: auction });
+            dispatch({ type: CREATE_NEW_AUCTION });
         } catch (err) {
             console.log(err);
         }
@@ -110,7 +110,6 @@ export function fetchSingleAuction(id) {
 
 
 export function placeBet(id, amount) {
-    console.log(id, amount);
     return async dispatch => {
         try {
             const bid = {
@@ -118,7 +117,7 @@ export function placeBet(id, amount) {
                 Budgivare: sessionStorage.getItem("user"),
                 Summa: parseInt(amount)
             };
-            const res = await fetch(bidURL + id, {
+            await fetch(bidURL + id, {
                 method: "POST",
                 body: JSON.stringify(bid),
                 headers: {

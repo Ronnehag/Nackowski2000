@@ -7,10 +7,17 @@ class SearchList extends Component {
 
     sortedList = () => {
         if (this.props.auctions.length) {
-            return this.props.auctions.sort((a, b) => {
-                if (a.SlutDatum === b.SlutDatum) return 0;
-                return a.SlutDatum > b.SlutDatum ? 1 : -1;
-            })
+            return this.props.auctions
+            .sort((a, b) => {
+                return a.SlutDatum.localeCompare(b.SlutDatum) ||
+                 b.SlutDatum.localeCompare(a.SlutDatum); 
+            }).sort((a,b) => {
+                if(a.SlutDatum < moment().format() || 
+                    b.SlutDatum < moment().format()) return -1;
+                if(a.SlutDatum === b.SlutDatum)
+                    return 0;
+                else return 1;
+            });
         }
         else {
             return [];
