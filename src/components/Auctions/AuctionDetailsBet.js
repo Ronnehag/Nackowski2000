@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
-import { getRemainingTime } from '../../Helpers/DateFunctions';
+import { getRemainingTime, formatDate } from '../../Helpers/DateFunctions';
 import moment from 'moment';
 
 
@@ -86,6 +86,7 @@ class AuctionDetailsBet extends React.Component {
 
     render() {
         const { error } = this.state;
+        const {SlutDatum} = this.props.item;
 
         let date3 = getRemainingTime(this.props.item.SlutDatum);
         const user = sessionStorage.getItem("user");
@@ -103,7 +104,7 @@ class AuctionDetailsBet extends React.Component {
                                 <p>Utropspris: {this.props.item.Utropspris}kr</p>
                             </div>
                             <div className="col-6 text-right">
-                                {valid ? <p>Slutar {date3}</p> : <p className="errorMessage">Avslutad</p>}
+                                {valid ? <p>Slutar {date3} | {formatDate(SlutDatum)}</p> : <p className="errorMessage">Avslutad</p>}
                             </div>
                         </div>
                         {user !== null && valid ?

@@ -11,9 +11,6 @@ class AuctionDetailsView extends React.Component {
         this.props.history.push({ pathname: "/" });
     }
 
-    validateUser = () => {
-
-    }
     render() {
         const user = sessionStorage.getItem("user");
         const hasBid = this.props.bids.length > 0;
