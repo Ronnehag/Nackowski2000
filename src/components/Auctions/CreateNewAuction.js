@@ -92,7 +92,6 @@ class CreateNewAuction extends Component {
 
     render() {
         const { errors } = this.state;
-        let errorUser = this.state.errors.användare;
 
         return (
 

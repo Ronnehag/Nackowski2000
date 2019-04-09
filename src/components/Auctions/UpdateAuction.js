@@ -17,7 +17,8 @@ class UpdateAuction extends Component {
         error: {
             Titel: "",
             Beskrivning: "",
-            HarBud: ""
+            HarBud: "",
+            användare:""
         }
     };
 
@@ -66,17 +67,25 @@ class UpdateAuction extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const { error } = this.state;
-        if (error.Titel || error.Beskrivning || error.Utropspris) return;
-        controlIfBids(this.state.AuktionID, (bool) => {
-            if (bool) {
-                this.props.dispatch(updateAuction(this.state))
-                this.props.history.push({ pathname: "/" });
-            } else {
-                this.setState(prevState => ({
-                    error: { ...prevState.error, HarBud: "Auktionen har fått ett bud och kan inte längre uppdateras." }
-                }));
-            }
-        });
+        const user = sessionStorage.getItem("user");
+        if(user === null)
+        {
+             this.setState({errorUser :"Du måste vara inloggad för att uppdatera en auktion"})
+        }
+        else{
+            if (error.Titel || error.Beskrivning || error.Utropspris) return;
+            controlIfBids(this.state.AuktionID, (bool) => {
+                if (bool) {
+                    this.props.dispatch(updateAuction(this.state))
+                    this.props.history.push({ pathname: "/" });
+                } else {
+                    this.setState(prevState => ({
+                        error: { ...prevState.error, HarBud: "Auktionen har fått ett bud och kan inte längre uppdateras." }
+                    }));
+                }
+            });
+        }
+       
     }
 
     componentDidUpdate(prevProps) {
@@ -132,6 +141,7 @@ class UpdateAuction extends Component {
                                     </div>
                                     <div className="form-group">
                                         <button type="submit" className="btn-sm btn-custom">Uppdatera</button>
+                                        <span className="errorMessage">{this.state.errorUser}</span>
                                     </div>
                                     <div className="row">
                                         <div className="col-12 text-center">
