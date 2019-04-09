@@ -169,3 +169,17 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 
+@media only screen and (max-width: 768px) {
+  #searchForm, #loginForm{
+    margin-top: 10px;
+  }
+  #searchForm input, #loginForm input{
+    width: 150px;
+  }
+  #searchForm button, #loginForm button{
+    padding: 3px 10px;
+    margin-bottom: 20px;
+  }
+
+
+}

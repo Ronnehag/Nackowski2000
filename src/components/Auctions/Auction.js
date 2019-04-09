@@ -4,16 +4,18 @@ import { getRemainingTime } from '../../Helpers/DateFunctions';
 export default class Auction extends React.Component {
 
     formatPrice = () => {
-        let price = this.props.item.Utropspris;
-        const { Bud } = this.props.item;
-        let highest;
-        if(Bud.length){
-            highest = this.getHighestBid(Bud);
+        if (this.props.item.Utropspris) {
+            let price = this.props.item.Utropspris;
+            const { Bud } = this.props.item;
+            let highest;
+            if (Bud.length) {
+                highest = this.getHighestBid(Bud);
+            }
+            if (highest > price) {
+                return highest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            }
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
-        if(highest > price){
-            return highest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        }
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
     getHighestBid = (arr) => {
@@ -28,7 +30,7 @@ export default class Auction extends React.Component {
 
     render() {
         let timeLeft = getRemainingTime(this.props.item.SlutDatum);
-        const { valid} = this.props;
+        const { valid } = this.props;
 
         let rand = (Math.floor(Math.random() * 50) + 1);
 
