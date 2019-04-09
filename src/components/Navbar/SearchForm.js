@@ -34,7 +34,7 @@ class SearchForm extends React.Component {
                 <form onSubmit={this.handleSubmit} className="form-inline ml-2" id="searchForm">
                     <div className="input-group">
                         <input type="text" onChange={this.handleChange} value={this.state.searchText} name="searchText" id="searchText" className="form-control-sm" placeholder="Sök auktioner" />
-                        <button type="submit" className="btn-sm btn-info"><i class="fas fa-search"></i> Sök</button>
+                        <button type="submit" className="btn-sm btn-info"><i className="fas fa-search"></i> Sök</button>
                     </div>
                 </form>
             </div>);

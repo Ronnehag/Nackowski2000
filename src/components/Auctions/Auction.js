@@ -5,7 +5,6 @@ export default class Auction extends React.Component {
 
     formatPrice = () => {
         if (this.props.item) {
-            console.log(this.props.item.Utropspris);
             let price = this.props.item.Utropspris;
             const { Bud } = this.props.item;
             let highest;

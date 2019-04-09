@@ -16,7 +16,7 @@ export class SignedInLinks extends Component {
                 <div className="form-inline" id="signout">
                     <div className="input-group">
                         <span className="navbar-text text-white mr-2">Welcome <strong>{user}</strong></span>
-                        <button className="btn-sm btn-custom ml-2" onClick={this.handleClick}><i class="fas fa-sign-in-alt"></i> Logga ut</button>
+                        <button className="btn-sm btn-custom ml-2" onClick={this.handleClick}><i className="fas fa-sign-in-alt"></i> Logga ut</button>
                     </div>
 
                 </div>

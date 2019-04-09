@@ -28,7 +28,7 @@ export class LoginForm extends Component {
                         <input type="text" onChange={this.handleChange} className="form-control-sm" placeholder="Användarnamn" />
                     </div>
                     <div className="input-group">
-                        <button type="submit" className="btn-sm btn-custom"><i class="fas fa-sign-in-alt"></i> Logga in</button>
+                        <button type="submit" className="btn-sm btn-custom"><i className="fas fa-sign-in-alt"></i> Logga in</button>
                     </div>
                 </form>
             </div>
