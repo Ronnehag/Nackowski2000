@@ -23,7 +23,8 @@ class CreateNewAuction extends Component {
         Utropspris: 0,
         errors: {
             Titel: "",
-            Beskrivning: ""
+            Beskrivning: "",
+            användare:""    
         }
     };
 
@@ -59,23 +60,34 @@ class CreateNewAuction extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        let errorUser = this.state.errors.användare;
 
-        if (formValid(this.state.errors)) {
-            this.setState({
-                Utropspris: parseInt(this.state.Utropspris),
-                StartDatum: moment().format("YYYY-MM-DDTHH:mm:ss"),
-                SkapadAv: sessionStorage.getItem("user")
-            }, () => {
-                this.props.dispatch(createAuction(this.state))
-                this.props.history.push({ pathname: "/" });
-            });
+        const user = sessionStorage.getItem("user");
+
+        if(user === null)
+        {
+             this.setState({errorUser :"Du måste vara inloggad för att skapa en auktion"})
+             console.log(this.state.errorUser)
         }
-        else {
-            //EJ korrekt ifyllt formulär
+        else{
+            if (formValid(this.state.errors)) {
+                this.setState({
+                    Utropspris: parseInt(this.state.Utropspris),
+                    StartDatum: moment().format("YYYY-MM-DDTHH:mm:ss"),
+                    SkapadAv: sessionStorage.getItem("user")
+                }, () => {
+                    this.props.dispatch(createAuction(this.state))
+                    this.props.history.push({ pathname: "/" });
+                });
+            }
+           
+            else {
+                //EJ korrekt ifyllt formulär
+            }
         }
-
-
-
+       
+      
+    
     }
 
     componentDidMount() {
@@ -85,8 +97,10 @@ class CreateNewAuction extends Component {
 
     render() {
         const { errors } = this.state;
+        let errorUser = this.state.errors.användare;
 
         return (
+
             <div className="row createAuctionContainer">
                 <div className="col-12 col-sm-12 offset-lg-2 col-lg-8 createAuctionForm">
                     <h1 className="text-center">Skapa ny auktion</h1>
@@ -120,14 +134,27 @@ class CreateNewAuction extends Component {
                             <div className="col-12 col-sm-12 col-md-10 offset-md-1 offset-lg-1 col-lg-10">
                                 <div className="form-group">
                                     <button type="submit" className="btn-sm btn-custom">Skapa</button>
+                                    <span className="errorMessage">{this.state.errorUser}</span>
+
                                 </div>
                             </div>
+                            
                         </div>
+                        
                     </form>
+                    
                 </div>
+                
             </div>
-        );
+        
+         
+            );
+ 
     }
 }
-
-export default connect()(CreateNewAuction)
+const mapStateToProps = (state) => {
+    return {
+        auction: state.auctions.auction
+    }
+}
+export default connect(mapStateToProps)(CreateNewAuction);
