@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 
 // Hämtar bud för auktionen med passat ID, returnar en callback som är true/false beroende på
@@ -19,4 +20,14 @@ export const controlIfHighestBid = (AuktionID, bid, callback) => {
                 const valid = bids.every(b => b.Summa < bid);
                 callback(valid);
             }))
+}
+
+export const controlIfAuctionIsValid = (AuktionID, callback) => {
+    let url = `http://nackowskis.azurewebsites.net/api/Auktion/${AuktionID}`;
+    fetch(url)
+        .then(res => res.json()
+            .then(auction => {
+                const valid = auction.SlutDatum > moment().format();
+                callback(valid)
+            }));
 }
