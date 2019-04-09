@@ -68,7 +68,6 @@ class AuctionDetailsBet extends React.Component {
         e.preventDefault();
         if (this.bidValid()) {
             controlIfHighestBid(this.props.item.AuktionID, this.state.amount, (valid) => {
-                console.log(valid);
                 if (valid) {
                     this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
                     this.setState(AuctionDetailsBet.initialState());
