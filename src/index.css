@@ -51,6 +51,9 @@ h1,h2,h3,h4,h5,h6{
 .container-fluid{
   padding: 0;
 }
+.btn-sm{
+  transition: all .2s ease-in;
+}
 /* NAVBAR */
 .navbar{
   padding: 0 10px 0 10px;
@@ -168,18 +171,23 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   margin-bottom: 10px;
 }
 
+#searchForm input, #loginForm input{
+  margin-right: 10px;
+}
+
 
 @media only screen and (max-width: 768px) {
   #searchForm, #loginForm{
     margin-top: 10px;
   }
   #searchForm input, #loginForm input{
-    width: 150px;
+    width: 100%;
   }
-  #searchForm button, #loginForm button{
-    padding: 3px 10px;
-    margin-bottom: 20px;
+  #searchForm button, #loginForm button, #signout button{
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
-
-
+  .navbar-text{
+    margin-top: 8px;
+  }
 }

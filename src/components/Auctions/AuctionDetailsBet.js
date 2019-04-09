@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
 import { getRemainingTime, formatDate } from '../../Helpers/DateFunctions';
+import { controlIfHighestBid, controlIfAuctionIsValid } from '../../Helpers/BidControll';
 import moment from 'moment';
 
 
@@ -12,7 +13,7 @@ class AuctionDetailsBet extends React.Component {
         return {
             amount: "Lägg bud",
             error: {
-                amount: ""
+                amount: "",
             }
         }
     }
@@ -66,8 +67,28 @@ class AuctionDetailsBet extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.bidValid()) {
-            this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
-            this.setState(AuctionDetailsBet.initialState());
+            controlIfHighestBid(this.props.item.AuktionID, this.state.amount, (valid) => {
+                if (valid) {
+                    controlIfAuctionIsValid(this.props.item.AuktionID, (active) => {
+                        if (active) {
+                            this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+                            this.setState(AuctionDetailsBet.initialState());
+                        }
+                        else {
+                            this.setState(prevState => ({
+                                ...prevState,
+                                error: { amount: "Auktionen har gått ut" }
+                            }))
+                        }
+                    })
+                }
+                else {
+                    this.setState(prevState => ({
+                        ...prevState,
+                        error: { amount: "Auktionen har fått in ett högre bud" }
+                    }))
+                }
+            })
         }
     }
 
@@ -86,7 +107,7 @@ class AuctionDetailsBet extends React.Component {
 
     render() {
         const { error } = this.state;
-        const {SlutDatum} = this.props.item;
+        const { SlutDatum } = this.props.item;
 
         let date3 = getRemainingTime(this.props.item.SlutDatum);
         const user = sessionStorage.getItem("user");

@@ -23,10 +23,12 @@ export class LoginForm extends Component {
     render() {
         return (
             <div>
-                <form className="form-inline" onSubmit={this.handleSubmit} id="loginForm">
+                <form className="form-inline ml-2" onSubmit={this.handleSubmit} id="loginForm">
                     <div className="input-group">
                         <input type="text" onChange={this.handleChange} className="form-control-sm" placeholder="Användarnamn" />
-                        <button type="submit" className="btn-sm btn-custom ml-2"><i class="fas fa-sign-in-alt"></i> Logga in</button>
+                    </div>
+                    <div className="input-group">
+                        <button type="submit" className="btn-sm btn-custom"><i class="fas fa-sign-in-alt"></i> Logga in</button>
                     </div>
                 </form>
             </div>

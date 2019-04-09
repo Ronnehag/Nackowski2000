@@ -16,7 +16,7 @@ class NavigationBar extends Component {
                     <div className="brand-div">
                         <Link className="navbar-brand ml-2 navbarText" to="/">Aredart</Link>
                         <div className="img-div">
-                            <img src={purpleGavel} alt="lila hammare"/>
+                            <img src={purpleGavel} alt="lila hammare" />
                         </div>
                     </div>
 
@@ -27,6 +27,9 @@ class NavigationBar extends Component {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Hem</Link>
+                            </li>
+                            <li className="nav-item">
+                                {isLoggedIn && <Link to="/newauction" className="nav-link">Ny auktion</Link>}
                             </li>
                         </ul>
                         <SearchForm />
