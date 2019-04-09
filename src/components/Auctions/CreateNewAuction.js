@@ -60,14 +60,10 @@ class CreateNewAuction extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        let errorUser = this.state.errors.användare;
-
         const user = sessionStorage.getItem("user");
-
         if(user === null)
         {
              this.setState({errorUser :"Du måste vara inloggad för att skapa en auktion"})
-             console.log(this.state.errorUser)
         }
         else{
             if (formValid(this.state.errors)) {
@@ -79,8 +75,7 @@ class CreateNewAuction extends Component {
                     this.props.dispatch(createAuction(this.state))
                     this.props.history.push({ pathname: "/" });
                 });
-            }
-           
+            }           
             else {
                 //EJ korrekt ifyllt formulär
             }
