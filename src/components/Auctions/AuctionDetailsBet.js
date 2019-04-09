@@ -13,7 +13,7 @@ class AuctionDetailsBet extends React.Component {
         return {
             amount: "Lägg bud",
             error: {
-                amount: ""
+                amount: "",
             }
         }
     }
@@ -72,6 +72,12 @@ class AuctionDetailsBet extends React.Component {
                 if (valid) {
                     this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
                     this.setState(AuctionDetailsBet.initialState());
+                }
+                else {
+                    this.setState(prevState => ({
+                        ...prevState,
+                        error: { amount: "Auktionen har fått in ett högre bud"}
+                    }))
                 }
             })
         }
