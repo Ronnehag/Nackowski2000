@@ -13,16 +13,12 @@ export class SignedInLinks extends Component {
         const user = sessionStorage.getItem("user");
         return (
             <div>
-                <div className="form-inline">
+                <div className="form-inline" id="signout">
                     <div className="input-group">
                         <span className="navbar-text text-white mr-2">Welcome <strong>{user}</strong></span>
-                    </div>
-                    <div className="input-group">
-                        <Link to="/newauction" className="nav-link">Ny auktion</Link>
-                    </div>
-                    <div className="input-group">
                         <button className="btn-sm btn-custom ml-2" onClick={this.handleClick}><i class="fas fa-sign-in-alt"></i> Logga ut</button>
                     </div>
+
                 </div>
             </div>
 
