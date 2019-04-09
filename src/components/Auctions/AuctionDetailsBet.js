@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
 import { getRemainingTime, formatDate } from '../../Helpers/DateFunctions';
-import { controlIfBids } from '../../Helpers/BidControll';
+import { controlIfHighestBid } from '../../Helpers/BidControll';
 import moment from 'moment';
 
 
@@ -67,7 +67,8 @@ class AuctionDetailsBet extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.bidValid()) {
-            controlIfBids(this.props.item.AuktionID, (valid) => {
+            controlIfHighestBid(this.props.item.AuktionID, this.state.amount, (valid) => {
+                console.log(valid);
                 if (valid) {
                     this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
                     this.setState(AuctionDetailsBet.initialState());
