@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
 import { getRemainingTime, formatDate } from '../../Helpers/DateFunctions';
-import { controlIfHighestBid, controlIfAuctionIsValid } from '../../Helpers/BidControll';
+import { controlIfHighestBid, controlIfAuctionIsValid, getHighestBid } from '../../Helpers/BidControll';
 import moment from 'moment';
 
 
@@ -14,21 +14,17 @@ class AuctionDetailsBet extends React.Component {
             amount: "Lägg bud",
             error: {
                 amount: "",
-            }
+            },
+            highestBid: ""
         }
     }
 
-    getHighestBid = () => {
+    getHighestBid = async () => {
+        let highest = await getHighestBid(this.props.item.AuktionID);
+        this.setState({
+            highestBid: highest
+        })
 
-        let url = `http://nackowskis.azurewebsites.net/api/bud/2000/${this.props.item.AuktionID}`;
-        fetch(url)
-        .then(res => res.json()
-        .then(json => {
-            if(json.length > 0)
-            {
-                return Math.max.apply(Math, json.map(b => b.Summa))
-            }            
-        }));
     }
 
     state = AuctionDetailsBet.initialState();
@@ -122,8 +118,7 @@ class AuctionDetailsBet extends React.Component {
         const user = sessionStorage.getItem("user");
 
         let valid = this.props.item.SlutDatum > moment().format();
-
-        let highest = this.getHighestBid();
+        this.getHighestBid();
 
         return (
             <div>
@@ -159,7 +154,7 @@ class AuctionDetailsBet extends React.Component {
                         </ul>
                     </div> : <div className="card-body">
                             <h6>Avslutande bud</h6>
-                            {this.props.bids.length > 0 ? <p>{highest} kr</p> : <p>Auktionen avslutades utan bud</p>}
+                            {this.props.bids.length > 0 ? <p>{this.state.highestBid} kr</p> : <p>Auktionen avslutades utan bud</p>}
 
                         </div>}
 

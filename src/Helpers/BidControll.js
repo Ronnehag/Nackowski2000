@@ -31,3 +31,12 @@ export const controlIfAuctionIsValid = (AuktionID, callback) => {
                 callback(active);
             }));
 }
+
+export const getHighestBid = async (AuktionID) => {
+    let url = `http://nackowskis.azurewebsites.net/api/bud/2000/${AuktionID}`;
+    const res = await fetch(url);
+    const bids = await res.json();
+    if (bids.length > 0) {
+        return Math.max.apply(Math, bids.map(b => b.Summa))
+    }
+}
