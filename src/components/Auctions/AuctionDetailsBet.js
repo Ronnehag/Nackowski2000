@@ -19,7 +19,16 @@ class AuctionDetailsBet extends React.Component {
     }
 
     getHighestBid = () => {
-        return Math.max.apply(Math, this.props.bids.map(b => b.Summa));
+
+        let url = `http://nackowskis.azurewebsites.net/api/bud/2000/${this.props.item.AuktionID}`;
+        fetch(url)
+        .then(res => res.json()
+        .then(json => {
+            if(json.length > 0)
+            {
+                return Math.max.apply(Math, json.map(b => b.Summa))
+            }            
+        }));
     }
 
     state = AuctionDetailsBet.initialState();
@@ -99,7 +108,7 @@ class AuctionDetailsBet extends React.Component {
                 return a.Summa < b.Summa ? 1 : -1;
             }).map(((k, i) => {
                 return (
-                    <li key={k.BudID || i} style={i == 0 ? first : null} className="list-group-item">{k.Budgivare} {k.Summa}kr</li>
+                    <li key={k.BudID || i} style={i == 0 ? first : null} className="list-group-item">{k.Budgivare} {k.Summa} kr</li>
                 );
             }))
         ) : (<span>Finns inga bud</span>);
