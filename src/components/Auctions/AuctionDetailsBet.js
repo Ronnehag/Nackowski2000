@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { placeBet } from '../../store/actions/auctionAction';
 import { getRemainingTime, formatDate } from '../../Helpers/DateFunctions';
+import { controlIfBids } from '../../Helpers/BidControll';
 import moment from 'moment';
 
 
@@ -66,8 +67,12 @@ class AuctionDetailsBet extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.bidValid()) {
-            this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
-            this.setState(AuctionDetailsBet.initialState());
+            controlIfBids(this.props.item.AuktionID, (valid) => {
+                if (valid) {
+                    this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+                    this.setState(AuctionDetailsBet.initialState());
+                }
+            })
         }
     }
 
@@ -86,7 +91,7 @@ class AuctionDetailsBet extends React.Component {
 
     render() {
         const { error } = this.state;
-        const {SlutDatum} = this.props.item;
+        const { SlutDatum } = this.props.item;
 
         let date3 = getRemainingTime(this.props.item.SlutDatum);
         const user = sessionStorage.getItem("user");
