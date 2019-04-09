@@ -69,9 +69,17 @@ class AuctionDetailsBet extends React.Component {
         if (this.bidValid()) {
             controlIfHighestBid(this.props.item.AuktionID, this.state.amount, (valid) => {
                 if (valid) {
-                    controlIfAuctionIsValid(this.props.item.AuktionID, () => {
-                        this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
-                        this.setState(AuctionDetailsBet.initialState());
+                    controlIfAuctionIsValid(this.props.item.AuktionID, (active) => {
+                        if (active) {
+                            this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+                            this.setState(AuctionDetailsBet.initialState());
+                        }
+                        else {
+                            this.setState(prevState => ({
+                                ...prevState,
+                                error: { amount: "Auktionen har gått ut" }
+                            }))
+                        }
                     })
                 }
                 else {

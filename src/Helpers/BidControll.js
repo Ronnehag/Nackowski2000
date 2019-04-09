@@ -23,11 +23,11 @@ export const controlIfHighestBid = (AuktionID, bid, callback) => {
 }
 
 export const controlIfAuctionIsValid = (AuktionID, callback) => {
-    let url = `http://nackowskis.azurewebsites.net/api/Auktion/${AuktionID}`;
+    let url = `http://nackowskis.azurewebsites.net/api/Auktion/2000/${AuktionID}`;
     fetch(url)
         .then(res => res.json()
             .then(auction => {
-                const valid = auction.SlutDatum > moment().format();
-                callback(valid)
+                const active = auction.SlutDatum > moment().format()
+                callback(active);
             }));
 }
