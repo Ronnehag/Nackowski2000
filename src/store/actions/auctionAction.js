@@ -63,7 +63,6 @@ export function deleteAuction(id) {
     }
 }
 export function updateAuction(auction) {
-    console.log("UPDATE", auction);
     return async dispatch => {
         try {
             const res = await fetch(auctionURL + auction.AuktionID, {
