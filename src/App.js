@@ -3,7 +3,6 @@ import CreateNewAuction from './components/Auctions/CreateNewAuction';
 import AuctionDetails from './components/Auctions/AuctionDetails';
 import SearchList from './components/Auctions/SearchList'
 import AuctionList from './components/Auctions/AuctionList';
-import Home from './components/Main/Home';
 import UpdateAuction from './components/Auctions/UpdateAuction';
 import NavigationBar from './components/Navbar/NavigationBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
