@@ -55,6 +55,10 @@ class AuctionDetailsBet extends React.Component {
                     else if (amount <= highest) {
                         error.amount = "Budet måste vara högre än tidigare bud"
                     }
+                    else if (amount > 2147483646)
+                    {
+                        error.amount = "Ange ett rimligt pris"
+                    }
                     else {
                         error.amount = "";
                     }
