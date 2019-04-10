@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import CreateNewAuction from './components/Auctions/CreateNewAuction';
 import AuctionDetails from './components/Auctions/AuctionDetails';
 import SearchList from './components/Auctions/SearchList'
+import AuctionList from './components/Auctions/AuctionList';
 import Home from './components/Main/Home';
 import UpdateAuction from './components/Auctions/UpdateAuction';
 import NavigationBar from './components/Navbar/NavigationBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from './store/actions/authAction';
+import { fetchAuctions } from './store/actions/auctionAction';
 
 class App extends Component {
 
@@ -16,6 +18,7 @@ class App extends Component {
     if (user) {
       this.props.dispatch(loginUser(user));
     }
+    this.props.dispatch(fetchAuctions());
   }
 
   render() {
@@ -24,7 +27,7 @@ class App extends Component {
         <NavigationBar />
         <div className="container pt-3">
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={AuctionList} />
             <Route path={`/Auctions/:id`} component={AuctionDetails} />
             <Route path={`/Update/:id`} component={UpdateAuction} />
             <Route path="/newauction" component={CreateNewAuction} />
