@@ -15,7 +15,8 @@ class AuctionDetailsBet extends React.Component {
             error: {
                 amount: "",
             },
-            highestBid: ""
+            highestBid: "",
+            disabled: false
         }
     }
 
@@ -76,28 +77,35 @@ class AuctionDetailsBet extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.bidValid()) {
-            controlIfHighestBid(this.props.item.AuktionID, this.state.amount, (valid) => {
-                if (valid) {
-                    controlIfAuctionIsValid(this.props.item.AuktionID, (active) => {
-                        if (active) {
-                            this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
-                            this.setState(AuctionDetailsBet.initialState());
-                        }
-                        else {
-                            this.setState(prevState => ({
-                                ...prevState,
-                                error: { amount: "Auktionen har gått ut" }
-                            }))
-                        }
-                    })
-                }
-                else {
-                    this.setState(prevState => ({
-                        ...prevState,
-                        error: { amount: "Auktionen har fått in ett högre bud" }
-                    }))
-                }
+            this.setState({
+                disabled: true
+            }, () => {
+                controlIfHighestBid(this.props.item.AuktionID, this.state.amount, (valid) => {
+                    if (valid) {
+                        controlIfAuctionIsValid(this.props.item.AuktionID, (active) => {
+                            if (active) {
+                                this.props.dispatch(placeBet(this.props.item.AuktionID, this.state.amount));
+                                this.setState(AuctionDetailsBet.initialState());
+                            }
+                            else {
+                                this.setState(prevState => ({
+                                    ...prevState,
+                                    error: { amount: "Auktionen har gått ut" },
+                                    disabled: false,
+                                }))
+                            }
+                        })
+                    }
+                    else {
+                        this.setState(prevState => ({
+                            ...prevState,
+                            error: { amount: "Auktionen har fått in ett högre bud" },
+                            disabled: false
+                        }))
+                    }
+                })
             })
+
         }
     }
 
@@ -139,10 +147,10 @@ class AuctionDetailsBet extends React.Component {
                         {user !== null && valid ?
                             <form className="row" onSubmit={this.handleSubmit}>
                                 <div className="input-group mt-2 col-12">
-                                    <input onChange={this.handleChange} value={this.state.amount} name="amount" type="number" placeholder="Lägg bud"
+                                    <input onChange={this.handleChange} value={this.state.amount} max="1000000" min="0" name="amount" type="number" placeholder="Lägg bud"
                                         className={error.amount.length > 0 ? "form-control error" : "form-control"} required
                                     />
-                                    <button className="btn btn-sm btn-primary ml-2">Lägg bud</button>
+                                    <button className="btn btn-sm btn-primary ml-2" disabled={this.state.disabled}>Lägg bud</button>
                                 </div>
                                 <div className="col-12 mt-1">
                                     {error.amount.length > 0 && (<span className="errorMessage">{error.amount}</span>)}

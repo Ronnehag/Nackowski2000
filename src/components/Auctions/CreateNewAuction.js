@@ -55,7 +55,6 @@ class CreateNewAuction extends Component {
         };
 
         this.setState({ errors, [event.target.name]: event.target.value });
-        console.log(this.state.errors);
     }
 
     handleSubmit = (event) => {
@@ -107,7 +106,7 @@ class CreateNewAuction extends Component {
                             </div>
                             <div className="col-12 col-sm-12 col-md-4 col-lg-4 form-group">
                                 <label htmlFor="utropspris">Utropspris</label>
-                                <input type="number" onChange={this.handleChange} name="Utropspris" id="utropspris" className="form-control" />
+                                <input type="number" max="1000000" min="0" onChange={this.handleChange} name="Utropspris" id="utropspris" className="form-control" />
                             </div>
                         </div>
                         <div className="row">
