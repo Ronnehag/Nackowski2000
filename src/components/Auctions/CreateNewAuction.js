@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createAuction } from '../../store/actions/auctionAction';
+import { createAuction, fetchAuctions } from '../../store/actions/auctionAction';
 import moment from 'moment';
 
 const formValid = errors => {
@@ -25,7 +25,9 @@ class CreateNewAuction extends Component {
             Titel: "",
             Beskrivning: "",
             användare:""    
-        }
+        },
+        disabled : false,
+        loading: false
     };
 
     handleChange = (event) => {
@@ -72,7 +74,13 @@ class CreateNewAuction extends Component {
                     SkapadAv: sessionStorage.getItem("user")
                 }, () => {
                     this.props.dispatch(createAuction(this.state))
-                    this.props.history.push({ pathname: "/" });
+                    this.setState({
+                        disabled : true,
+                        loading: true
+                    }, () => setTimeout(() => {
+                        this.props.dispatch(fetchAuctions());
+                        this.props.history.push({ pathname: "/" });
+                    }, 600));
                 });
             }           
             else {
@@ -126,10 +134,17 @@ class CreateNewAuction extends Component {
                         <div className="row">
                             <div className="col-12 col-sm-12 col-md-10 offset-md-1 offset-lg-1 col-lg-10">
                                 <div className="form-group">
-                                    <button type="submit" className="btn-sm btn-custom">Skapa</button>
+                                    <button type="submit" className="btn-sm btn-custom" disabled={this.state.disabled}>Skapa</button>
+                                    <br/>
                                     <span className="errorMessage">{this.state.errorUser}</span>
-
+                                    <br/>
                                 </div>
+                                {this.state.loading && (<div className="col 12 text-center pb-1">
+                                <div className="spinner-grow text-primary" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                 </div>
+                            </div>)}
+
                             </div>
                             
                         </div>

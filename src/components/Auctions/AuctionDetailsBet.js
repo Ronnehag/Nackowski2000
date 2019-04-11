@@ -44,7 +44,7 @@ class AuctionDetailsBet extends React.Component {
         this.setState({
             [e.target.name]: Math.ceil(e.target.value)
         }, () => {
-            let highest = this.getHighestBid();
+            let highest = this.state.highestBid;
             let error = this.state.error;
             const { amount } = this.state;
 
