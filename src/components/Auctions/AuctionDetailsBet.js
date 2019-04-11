@@ -43,9 +43,9 @@ class AuctionDetailsBet extends React.Component {
     handleChange = (e) => {
         let name = e.target.name;
         let value = Math.ceil(e.target.value);
-        if(value >= e.target.max){
+        if(value > e.target.max){
             this.setState({
-                error: {...this.state.error, max: "Maxvärde för ett bud uppnått"}
+                error: {...this.state.error, max: "Högsta giltiga bud är 1 miljon SEK"}
             });
             return;
         }
@@ -74,7 +74,8 @@ class AuctionDetailsBet extends React.Component {
             };
             this.setState(prevState => ({
                 ...prevState,
-                error: error
+                error: {amount : error.amount},
+                max: ""
             }));
         });
     }
