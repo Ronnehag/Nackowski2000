@@ -180,6 +180,9 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   #searchForm, #loginForm{
     margin-top: 10px;
   }
+  .container{
+    min-width: 100%;
+  }
   #searchForm input, #loginForm input{
     width: 100%;
   }
@@ -189,5 +192,8 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
   .navbar-text{
     margin-top: 8px;
+  }
+  .createAuctionForm{
+    box-shadow: none;
   }
 }
