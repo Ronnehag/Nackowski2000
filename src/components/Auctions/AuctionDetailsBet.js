@@ -14,7 +14,6 @@ class AuctionDetailsBet extends React.Component {
             amount: "Lägg bud",
             error: {
                 amount: "",
-                max: ""
             },
             highestBid: "",
             disabled: false
@@ -42,19 +41,8 @@ class AuctionDetailsBet extends React.Component {
 
     handleChange = (e) => {
         let name = e.target.name;
-        let value = Math.ceil(e.target.value);
-        if (value > e.target.max) {
-            value = e.target.max;
-            this.setState({
-                amount: value,
-                error: { ...this.state.error, max: "Högsta giltiga bud är 1 miljon SEK" }
-            });
-            
-            return;
-        }
-
         this.setState({
-            [e.target.name]: value
+            [e.target.name]: Math.ceil(e.target.value)
         }, () => {
             let highest = this.state.highestBid;
             let error = this.state.error;
@@ -78,8 +66,7 @@ class AuctionDetailsBet extends React.Component {
             };
             this.setState(prevState => ({
                 ...prevState,
-                error: { amount: error.amount },
-                max: ""
+                error: error,
             }));
         });
     }
@@ -160,14 +147,14 @@ class AuctionDetailsBet extends React.Component {
                                     <input onChange={this.handleChange} value={this.state.amount} max="1000000" min="0" name="amount" type="number" placeholder="Lägg bud"
                                         className={error.amount.length > 0 ? "form-control error" : "form-control"} required
                                     />
-                                    {!disabled ? 
-                                    (<button className="btn btn-sm btn-primary ml-2" disabled={disabled}
-                                    >Lägg bud</button>) : 
-                                    (
-                                        <button className="btn btn-sm btn-primary ml-2" disabled={disabled}>
-                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                            <span class="sr-only">Loading...</span>
-                                        </button>)
+                                    {!disabled ?
+                                        (<button className="btn btn-sm btn-primary ml-2" disabled={disabled}
+                                        >Lägg bud</button>) :
+                                        (
+                                            <button className="btn btn-sm btn-primary ml-2" disabled={disabled}>
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                <span class="sr-only">Loading...</span>
+                                            </button>)
                                     }
 
                                     <div className="col-12 mt-1" style={{ paddingLeft: "0" }}>
