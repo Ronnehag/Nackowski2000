@@ -129,7 +129,7 @@ class UpdateAuction extends Component {
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-4 col-lg-4 form-group mt-1">
                                             <label htmlFor="Utropspris">Utropspris</label>
-                                            <input type="number" onChange={this.handleChange} defaultValue={Utropspris} name="Utropspris" id="Utropspris" className="form-control" />
+                                            <input type="number" max="1000000" min="0" onChange={this.handleChange} defaultValue={Utropspris} name="Utropspris" id="Utropspris" className="form-control" />
                                         </div>
                                     </div>
                                     <div className="form-group row">
