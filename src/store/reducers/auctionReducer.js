@@ -16,15 +16,16 @@ const initialState = {
 }
 
 export default function auctionReducer(state = initialState, action) {
-
+    console.log(action.payload);
     switch (action.type) {
         case PLACE_BET:
+            let auction = state.items.find(a => a.AuktionID === action.payload.AuktionID);
+            auction.Bud.push(action.payload);
             return {
                 ...state,
+                items: [...state.items.filter(a => a.AuktionID !== action.payload.Auktion), auction],
                 auction: { ...state.auction, Bud: [...state.auction.Bud, action.payload] }
             }
-
-
         case FETCH_SINGLE_AUCTION:
             return {
                 ...state,

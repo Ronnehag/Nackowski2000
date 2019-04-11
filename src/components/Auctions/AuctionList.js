@@ -28,8 +28,8 @@ class AuctionList extends React.Component {
                 <Auction item={auction} key={auction.AuktionID} valid={valid} />
             )
         }) : (
-                <div className="col-6 offset-6 mt-5 mt-10">
-                    <div className="spinner-grow text-primary" role="status">
+                <div className="col-12 text-center mt-5 mt-10">
+                    <div className="spinner-grow text-primary" style={{width: "4rem", height: "4rem"}} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
                 </div>
