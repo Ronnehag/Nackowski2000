@@ -44,10 +44,12 @@ class AuctionDetailsBet extends React.Component {
         let name = e.target.name;
         let value = Math.ceil(e.target.value);
         if (value > e.target.max) {
+            value = e.target.max;
             this.setState({
+                amount: value,
                 error: { ...this.state.error, max: "Högsta giltiga bud är 1 miljon SEK" }
             });
-            value = e.target.max;
+            
             return;
         }
 
