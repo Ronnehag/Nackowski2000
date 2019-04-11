@@ -23,7 +23,7 @@ export default function auctionReducer(state = initialState, action) {
             auction.Bud.push(action.payload);
             return {
                 ...state,
-                items: [...state.items.filter(a => a.AuktionID !== action.payload.Auktion), auction],
+                items: [...state.items.filter(a => a.AuktionID !== action.payload.AuktionID), auction],
                 auction: { ...state.auction, Bud: [...state.auction.Bud, action.payload] }
             }
         case FETCH_SINGLE_AUCTION:
