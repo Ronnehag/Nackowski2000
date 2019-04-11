@@ -56,10 +56,7 @@ class AuctionDetailsBet extends React.Component {
                     else if (amount <= highest) {
                         error.amount = "Budet måste vara högre än tidigare bud"
                     }
-                    else if (amount > 2147483646)
-                    {
-                        error.amount = "Ange ett rimligt pris"
-                    }
+                  
                     else {
                         error.amount = "";
                     }
@@ -152,9 +149,7 @@ class AuctionDetailsBet extends React.Component {
                                     />
                                     <button className="btn btn-sm btn-primary ml-2" disabled={this.state.disabled}>Lägg bud</button>
                                 </div>
-                                <div className="col-12 mt-1">
-                                    {error.amount.length > 0 && (<span className="errorMessage">{error.amount}</span>)}
-                                </div>
+                              
                             </form>
 
                             : null}
