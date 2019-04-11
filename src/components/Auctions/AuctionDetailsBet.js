@@ -14,6 +14,7 @@ class AuctionDetailsBet extends React.Component {
             amount: "Lägg bud",
             error: {
                 amount: "",
+                max: ""
             },
             highestBid: "",
             disabled: false
@@ -41,8 +42,15 @@ class AuctionDetailsBet extends React.Component {
 
     handleChange = (e) => {
         let name = e.target.name;
+        let value = Math.ceil(e.target.value);
+        if(value >= e.target.max){
+            this.setState({
+                error: {...this.state.error, max: "Maxvärde för ett bud uppnått"}
+            });
+            return;
+        }
         this.setState({
-            [e.target.name]: Math.ceil(e.target.value)
+            [e.target.name]: value
         }, () => {
             let highest = this.state.highestBid;
             let error = this.state.error;
@@ -145,9 +153,13 @@ class AuctionDetailsBet extends React.Component {
                             <form className="row" onSubmit={this.handleSubmit}>
                                 <div className="input-group mt-2 col-12">
                                     <input onChange={this.handleChange} value={this.state.amount} max="1000000" min="0" name="amount" type="number" placeholder="Lägg bud"
-                                        className={error.amount.length > 0 ? "form-control error" : "form-control"} required
+                                        className={error.amount.length > 0 ||  error.max ? "form-control error" : "form-control"} required
                                     />
                                     <button className="btn btn-sm btn-primary ml-2" disabled={this.state.disabled}>Lägg bud</button>
+                    
+                                    <div className="col-12 mt-1" style={{paddingLeft: "0"}}>
+                                    {(error.amount.length > 0 || error.max) && (<span className="errorMessage">{error.amount || error.max}</span>)}
+                                </div>
                                 </div>
                               
                             </form>
