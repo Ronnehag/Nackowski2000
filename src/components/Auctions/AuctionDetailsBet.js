@@ -43,12 +43,14 @@ class AuctionDetailsBet extends React.Component {
     handleChange = (e) => {
         let name = e.target.name;
         let value = Math.ceil(e.target.value);
-        if(value > e.target.max){
+        if (value >= e.target.max) {
             this.setState({
-                error: {...this.state.error, max: "Högsta giltiga bud är 1 miljon SEK"}
+                error: { ...this.state.error, max: "Högsta giltiga bud är 1 miljon SEK" }
             });
+            value = e.target.max;
             return;
         }
+
         this.setState({
             [e.target.name]: value
         }, () => {
@@ -64,7 +66,7 @@ class AuctionDetailsBet extends React.Component {
                     else if (amount <= highest) {
                         error.amount = "Budet måste vara högre än tidigare bud"
                     }
-                  
+
                     else {
                         error.amount = "";
                     }
@@ -74,7 +76,7 @@ class AuctionDetailsBet extends React.Component {
             };
             this.setState(prevState => ({
                 ...prevState,
-                error: {amount : error.amount},
+                error: { amount: error.amount },
                 max: ""
             }));
         });
@@ -129,7 +131,7 @@ class AuctionDetailsBet extends React.Component {
     }
 
     render() {
-        const { error } = this.state;
+        const { error, disabled } = this.state;
         const { SlutDatum } = this.props.item;
 
         let date3 = getRemainingTime(this.props.item.SlutDatum);
@@ -154,15 +156,23 @@ class AuctionDetailsBet extends React.Component {
                             <form className="row" onSubmit={this.handleSubmit}>
                                 <div className="input-group mt-2 col-12">
                                     <input onChange={this.handleChange} value={this.state.amount} max="1000000" min="0" name="amount" type="number" placeholder="Lägg bud"
-                                        className={error.amount.length > 0 ||  error.max ? "form-control error" : "form-control"} required
+                                        className={error.amount.length > 0 ? "form-control error" : "form-control"} required
                                     />
-                                    <button className="btn btn-sm btn-primary ml-2" disabled={this.state.disabled}>Lägg bud</button>
-                    
-                                    <div className="col-12 mt-1" style={{paddingLeft: "0"}}>
-                                    {(error.amount.length > 0 || error.max) && (<span className="errorMessage">{error.amount || error.max}</span>)}
+                                    {!disabled ? 
+                                    (<button className="btn btn-sm btn-primary ml-2" disabled={disabled}
+                                    >Lägg bud</button>) : 
+                                    (
+                                        <button className="btn btn-sm btn-primary ml-2" disabled={disabled}>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            <span class="sr-only">Loading...</span>
+                                        </button>)
+                                    }
+
+                                    <div className="col-12 mt-1" style={{ paddingLeft: "0" }}>
+                                        {(error.amount.length > 0 || error.max) && (<span className="errorMessage">{error.amount || error.max}</span>)}
+                                    </div>
                                 </div>
-                                </div>
-                              
+
                             </form>
 
                             : null}
